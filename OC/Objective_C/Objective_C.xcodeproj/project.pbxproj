@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113641571DC3234B00D1DD71 /* VerifyCodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 113641551DC3234B00D1DD71 /* VerifyCodeButton.m */; };
 		11DBF6F91DC1DC53000C4FDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6F81DC1DC53000C4FDD /* main.m */; };
 		11DBF6FC1DC1DC53000C4FDD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6FB1DC1DC53000C4FDD /* AppDelegate.m */; };
 		11DBF6FF1DC1DC53000C4FDD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6FE1DC1DC53000C4FDD /* ViewController.m */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		113641551DC3234B00D1DD71 /* VerifyCodeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyCodeButton.m; sourceTree = "<group>"; };
+		113641561DC3234B00D1DD71 /* VerifyCodeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifyCodeButton.h; sourceTree = "<group>"; };
 		11DBF6F41DC1DC53000C4FDD /* Objective_C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Objective_C.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DBF6F81DC1DC53000C4FDD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		11DBF6FA1DC1DC53000C4FDD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,6 +61,8 @@
 		11DBF6F61DC1DC53000C4FDD /* Objective_C */ = {
 			isa = PBXGroup;
 			children = (
+				113641551DC3234B00D1DD71 /* VerifyCodeButton.m */,
+				113641561DC3234B00D1DD71 /* VerifyCodeButton.h */,
 				11DBF6FA1DC1DC53000C4FDD /* AppDelegate.h */,
 				11DBF6FB1DC1DC53000C4FDD /* AppDelegate.m */,
 				11DBF6FD1DC1DC53000C4FDD /* ViewController.h */,
@@ -153,6 +158,7 @@
 			files = (
 				11DBF6FF1DC1DC53000C4FDD /* ViewController.m in Sources */,
 				11DBF6FC1DC1DC53000C4FDD /* AppDelegate.m in Sources */,
+				113641571DC3234B00D1DD71 /* VerifyCodeButton.m in Sources */,
 				11DBF6F91DC1DC53000C4FDD /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,6 +316,7 @@
 				11DBF70D1DC1DC53000C4FDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
