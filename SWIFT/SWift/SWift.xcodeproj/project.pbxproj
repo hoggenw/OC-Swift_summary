@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113641581DC3247900D1DD71 /* VerifyCodeButton.swift */; };
 		11DBF6DA1DC1DBC0000C4FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6D91DC1DBC0000C4FDD /* AppDelegate.swift */; };
 		11DBF6DC1DC1DBC0000C4FDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6DB1DC1DBC0000C4FDD /* ViewController.swift */; };
 		11DBF6DF1DC1DBC0000C4FDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11DBF6DD1DC1DBC0000C4FDD /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		113641581DC3247900D1DD71 /* VerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyCodeButton.swift; sourceTree = "<group>"; };
 		11DBF6D61DC1DBC0000C4FDD /* SWift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DBF6D91DC1DBC0000C4FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		11DBF6DB1DC1DBC0000C4FDD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		11DBF6D81DC1DBC0000C4FDD /* SWift */ = {
 			isa = PBXGroup;
 			children = (
+				113641581DC3247900D1DD71 /* VerifyCodeButton.swift */,
 				11DBF6D91DC1DBC0000C4FDD /* AppDelegate.swift */,
 				11DBF6DB1DC1DBC0000C4FDD /* ViewController.swift */,
 				11DBF6DD1DC1DBC0000C4FDD /* Main.storyboard */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11DBF6DC1DC1DBC0000C4FDD /* ViewController.swift in Sources */,
+				113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */,
 				11DBF6DA1DC1DBC0000C4FDD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,6 +304,7 @@
 				11DBF6EA1DC1DBC0000C4FDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
