@@ -35,3 +35,8 @@ NSString *telePhoneCharset = @"((\\d{11})|^((\\d{7,8})|(\\d{4}|\\d{3})-(\\d{7,8}
 ```
 regex = @"^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
 ```
+###11月4日
+获取字符串size的方法
+```
+"A".size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 20)])
+```
