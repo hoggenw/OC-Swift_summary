@@ -40,3 +40,12 @@ regex = @"^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
 ```
 "A".size(attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 20)])
 ```
+方法OC
+```
+[self boundingRectWithSize:maxSize options:options attributes:attributes context:nil];
+```
+
+改为swift
+```
+self.boundingRect(with: maxSize,options: options,attributes: attributes,context: nil)
+```
