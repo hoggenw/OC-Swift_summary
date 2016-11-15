@@ -56,6 +56,7 @@ class VerifyCodeButton: UIButton {
             
         }
         
+        
         //调用drawRect：之前，系统会向栈中压入一个CGContextRef，调用UIGraphicsGetCurrentContext()会取栈顶的CGContextRef
         let context = UIGraphicsGetCurrentContext()
         context!.setLineWidth(CGFloat(kLineWith));
