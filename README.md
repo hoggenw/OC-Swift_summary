@@ -49,3 +49,5 @@ regex = @"^(\\d{15}$|^\\d{18}$|^\\d{17}(\\d|X|x))$";
 ```
 self.boundingRect(with: maxSize,options: options,attributes: attributes,context: nil)
 ```
+###小tip
+涉及到视图显示的，查一下视图显示结果或许更好
