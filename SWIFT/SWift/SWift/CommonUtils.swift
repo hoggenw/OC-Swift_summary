@@ -26,14 +26,16 @@ class PSCommonUtils: NSObject {
         
     }
     
+    
     //MARK:图片缓存机制实现
-    class func judgeCacheRefreshWith(urlString: String) -> UIImage {
+    class func judgeCacheRefreshWith(urlString: String,imageView :UIImageView){
         //缓存路径
         let imageCache = ImageCache(name: "myImageSpace")
         
-        var image1  = imageCache.retrieveImageInDiskCache(forKey: urlString)
+        imageView.image  = imageCache.retrieveImageInDiskCache(forKey: urlString)
+        print("\(imageView.image)")
         //判断是否存在缓存
-        if image1 == nil {
+        if imageView.image == nil {
             KingfisherManager.shared.downloader.downloadImage(with: URL(string: urlString)!, options: nil, progressBlock: {(receivedSize, totalSize) in
                 
                 
@@ -45,18 +47,15 @@ class PSCommonUtils: NSObject {
                 }
                 //存入本地磁盘
                 imageCache.store(image!, forKey: urlString)
+                print("获取图片成功")
                 //返回数据
-                image1 = image
+                imageView.image = image!
+                
             })
             
-        }else{
-            return image1!
         }
         
-        //清楚缓存
-        //imageCache.clearDiskCache()
         
-        return image1!
     }
     
     //MARK:上传日志
