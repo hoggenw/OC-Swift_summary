@@ -16,13 +16,14 @@ extension String {
         // md5 加密
         let cStr = self.cString(using: String.Encoding.utf8);
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: Int(CC_MD5_DIGEST_LENGTH))
-        CC_MD5(cStr!, CC_LONG(strlen(cStr!)), buffer)
-        var md5String = String()
+        CC_MD5(cStr!, CC_LONG(lengthOfBytes(using: String.Encoding.utf8)), buffer)
+        let md5String = NSMutableString()
         for index in 0..<Int(CC_MD5_DIGEST_LENGTH) {
-           md5String = md5String.appendingFormat("x", buffer[index])
+            md5String.appendFormat("%02x", buffer[index])
         }
         free(buffer)
-        return md5String
+        return String(format: md5String as String)
+
 
     }
 
