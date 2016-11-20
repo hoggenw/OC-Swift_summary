@@ -1,8 +1,8 @@
 //
 //  Timer+Extension.swift
-//  千机团Swift
+//  Swift
 //
-//  Created by 王留根 on 16/9/30.
+//  Created by 王留根 on 16/10/30.
 //  Copyright © 2016年 ios-mac. All rights reserved.
 //
 

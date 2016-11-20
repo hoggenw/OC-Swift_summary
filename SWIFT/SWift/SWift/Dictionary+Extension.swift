@@ -1,6 +1,6 @@
 //
 //  Dictionary+Extension.swift
-//  千机团Swift
+//  Swift
 //
 //  Created by 王留根 on 16/11/8.
 //  Copyright © 2016年 ios-mac. All rights reserved.
