@@ -48,4 +48,12 @@
 }
 
 
+
+@end
+//H5的HTTPS添加
+@implementation NSURLRequest(DataController)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString *)host
+{
+    return YES;
+}
 @end
