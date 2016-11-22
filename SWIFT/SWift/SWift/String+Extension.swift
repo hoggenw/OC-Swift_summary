@@ -86,6 +86,78 @@ extension String {
         
     }
 
+    subscript (r: Range<Int>) -> String {
+        get {
+            return substring(with: r)
+        }
+    }
+    
+    func index(from: Int) -> Index {
+        return self.index(startIndex, offsetBy: from)
+    }
+    
+    func substring(from: Int) -> String {
+        let fromIndex = index(from: from)
+        return substring(from: fromIndex)
+    }
+    
+    func substring(to: Int) -> String {
+        let toIndex = index(from: to)
+        return substring(to: toIndex)
+    }
+    
+    func substring(with r: Range<Int>) -> String {
+        let startIndex = index(from: r.lowerBound)
+        let endIndex = index(from: r.upperBound)
+        return substring(with: startIndex..<endIndex)
+    }
+    
+    var md5:String {
+        let str = cString(using: String.Encoding.utf8)
+        let strLen = CC_LONG(lengthOfBytes(using: String.Encoding.utf8))
+        let digestLen = Int(CC_MD5_DIGEST_LENGTH)
+        let result = UnsafeMutablePointer<CUnsignedChar>.allocate(capacity: digestLen)
+        
+        CC_MD5(str!, strLen, result)
+        
+        let hash = NSMutableString()
+        for i in 0..<digestLen {
+            hash.appendFormat("%02x", result[i])
+        }
+        
+        result.deallocate(capacity: digestLen)
+        
+        return String(format: hash as String)
+    }
+    
+    public func sizeRect(size:CGSize,font:UIFont) -> CGSize {
+        let str = self as NSString
+        let size = str.boundingRect(with: size,options: NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin),attributes: [NSFontAttributeName:font], context: nil).size
+        return size
+    }
+    
+    
+    func size(_ maxSize: CGSize, _ font: UIFont, _ lineMargin: CGFloat) -> CGSize {
+        
+        let options: NSStringDrawingOptions = NSStringDrawingOptions.usesLineFragmentOrigin
+        
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineMargin // 行间距
+        
+        var attributes = [String : Any]()
+        attributes[NSFontAttributeName] = font
+        attributes[NSParagraphStyleAttributeName] = paragraphStyle
+        
+        let str = self as NSString
+        let textBounds = str.boundingRect(with: maxSize, options: options, attributes: attributes, context: nil)
+        
+        return textBounds.size
+    }
+    
+    
+    func toDouble() -> Double? {
+        return NumberFormatter().number(from: self)?.doubleValue
+    }
     
 }
 
