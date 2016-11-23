@@ -65,3 +65,6 @@ self.boundingRect(with: maxSize,options: options,attributes: attributes,context:
     //置为NO，主要用于这种情况：客户端请求的是子域名，而证书上的是另外一个域名。因为SSL证书上的域名是独立的，假如证书上注册的域名是www.google.com，那么mail.google.com是无法验证通过的；当然，有钱可以注册通配符的域名*.google.com，但这个还是比较贵的。
     //如置为NO，建议自己添加对应域名的校验逻辑。
     manager.securityPolicy.validatesDomainName = NO;
+    
+ ###https视乎自签名在ios9以下无法使用
+ ###swift中tableview卡顿
