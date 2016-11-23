@@ -158,7 +158,42 @@ extension String {
     func toDouble() -> Double? {
         return NumberFormatter().number(from: self)?.doubleValue
     }
-    
+    func totalPriceJudge() ->String {
+        var str = String(format: "%.2f", self.toFloatValue()!)
+        
+        if str.hasSuffix("00") {
+            
+            str = str.substring(to: str.characters.count - 3)
+        }else if str.hasSuffix("0"){
+            str = str.substring(to: str.characters.count - 1)
+        }
+        return str
+        
+    }
+    //MARK:字符串替代
+    func replaceString()->String {
+        let range : NSRange = (self as NSString).range(of: ".")
+        
+        var firstString  = range.location != NSNotFound ? (self as NSString).components(separatedBy: ".").first :self
+        
+        if firstString?.characters.count == 11 {
+            let nsrange = NSRange.init(location: 3, length: 4)
+            return (self as NSString).replacingCharacters(in: nsrange, with: "****") as String
+            
+        }else if (firstString?.characters.count)! >= 5 && (firstString?.characters.count)! != 11 {
+            let nsrange = NSRange.init(location: 1, length: 2)
+            return (self as NSString).replacingCharacters(in: nsrange, with: "**") as String
+        }else if (firstString?.characters.count)! >= 3 && (firstString?.characters.count)! < 5 {
+            let nsrange = NSRange.init(location: 1, length: 1)
+            return (self as NSString).replacingCharacters(in: nsrange, with: "*") as String
+        }else if (firstString?.characters.count)! >= 1 && (firstString?.characters.count)! < 3 {
+            let nsrange = NSRange.init(location: 0, length: 1)
+            return (self as NSString).replacingCharacters(in: nsrange, with: "*") as String
+        }
+        
+        return self
+        
+    }
 }
 
 

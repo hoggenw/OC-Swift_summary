@@ -181,6 +181,26 @@ class PSCommonUtils: NSObject {
         
     }
     
+    //MARK:富文本装换
+    class func  changeSellPriceToAttributedString(needString:String?,littleFont:UIFont,bigFont:UIFont,color:UIColor) -> NSMutableAttributedString {
+        guard needString != nil else {
+            return NSMutableAttributedString()
+        }
+        let attributeString:NSMutableAttributedString = NSMutableAttributedString(string: String(format: "%@", needString!))
+        
+        
+        let rangeBack : NSRange = (attributeString.string as NSString).range(of: needString!)
+        attributeString.setAttributes([NSForegroundColorAttributeName:color, NSFontAttributeName:bigFont], range: rangeBack)
+        
+        let range : NSRange = (attributeString.string as NSString).range(of: "¥")
+        attributeString.setAttributes([NSForegroundColorAttributeName:color, NSFontAttributeName:littleFont], range: range)
+        
+        return attributeString
+        
+        
+        
+    }
+    
     
 }
 
