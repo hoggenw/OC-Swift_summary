@@ -200,6 +200,27 @@ class PSCommonUtils: NSObject {
         
         
     }
+    func *******weakself在block里面的写法******() {
+        bannerScroller?.tapActionBlock = {[weak self](index) in
+            if (self?.dataArray[0].count)! > 0 {
+                let model = self?.dataArray[0][index]
+                MobClick.event("Banner")
+                
+                if (model?.url?.characters.count)! > 0 {
+                    let activeVc = PSActiveWebViewController()
+                    activeVc.urlString = model?.url
+                    activeVc.hidesBottomBarWhenPushed = true
+                    _ = self?.navigationController?.pushViewController(activeVc, animated: false)
+                    
+                }else{
+                    print("商品详情")
+                }
+            }
+            
+            
+        }
+    }
+    
     
     
 }
