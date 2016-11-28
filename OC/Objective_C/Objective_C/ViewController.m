@@ -20,6 +20,7 @@
     [super viewDidLoad];
     if([[[UIDevice currentDevice] systemVersion] floatValue] < 9){
         self.failedRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://sslapi.qjt1000.com/rest"]];
+        NSURLRequest *request = self.failedRequest;
         NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
         [urlConnection start];
     }

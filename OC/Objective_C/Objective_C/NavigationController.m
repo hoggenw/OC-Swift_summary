@@ -2,18 +2,18 @@
 //  PSNavigationController.m
 //  qianjituan2.0
 //
-//  Created by 小唐 on 7/27/16.
+//  Created by mac on 7/27/16.
 //  Copyright © 2016 ios-mac. All rights reserved.
 //
 
-#import "PSNavigationController.h"
+#import "NavigationController.h"
 
 
-@interface PSNavigationController () <UIGestureRecognizerDelegate>
+@interface NavigationController () <UIGestureRecognizerDelegate>
 
 @end
 
-@implementation PSNavigationController 
+@implementation NavigationController
 
 - (void)viewDidLoad
 {

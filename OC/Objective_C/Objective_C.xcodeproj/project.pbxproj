@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11227C7D1DEBB46300F72797 /* MainTarbBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11227C791DEBB46300F72797 /* MainTarbBarController.m */; };
+		11227C7E1DEBB46300F72797 /* NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11227C7C1DEBB46300F72797 /* NavigationController.m */; };
 		112329F91DCAD6DC00B1911B /* YLUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 112329F81DCAD6DC00B1911B /* YLUtils.m */; };
 		112329FE1DCAD7D200B1911B /* GTMBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 112329FC1DCAD7D200B1911B /* GTMBase64.m */; };
 		113641571DC3234B00D1DD71 /* VerifyCodeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 113641551DC3234B00D1DD71 /* VerifyCodeButton.m */; };
@@ -19,6 +21,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		11227C791DEBB46300F72797 /* MainTarbBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTarbBarController.m; sourceTree = "<group>"; };
+		11227C7A1DEBB46300F72797 /* MainTarbBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTarbBarController.h; sourceTree = "<group>"; };
+		11227C7B1DEBB46300F72797 /* NavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationController.h; sourceTree = "<group>"; };
+		11227C7C1DEBB46300F72797 /* NavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationController.m; sourceTree = "<group>"; };
 		112329F71DCAD6DC00B1911B /* YLUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLUtils.h; sourceTree = "<group>"; };
 		112329F81DCAD6DC00B1911B /* YLUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLUtils.m; sourceTree = "<group>"; };
 		112329FB1DCAD7D200B1911B /* GTMBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMBase64.h; sourceTree = "<group>"; };
@@ -78,6 +84,10 @@
 		11DBF6F61DC1DC53000C4FDD /* Objective_C */ = {
 			isa = PBXGroup;
 			children = (
+				11227C791DEBB46300F72797 /* MainTarbBarController.m */,
+				11227C7A1DEBB46300F72797 /* MainTarbBarController.h */,
+				11227C7B1DEBB46300F72797 /* NavigationController.h */,
+				11227C7C1DEBB46300F72797 /* NavigationController.m */,
 				112329FA1DCAD7D200B1911B /* GTMBase64 */,
 				113641551DC3234B00D1DD71 /* VerifyCodeButton.m */,
 				113641561DC3234B00D1DD71 /* VerifyCodeButton.h */,
@@ -178,8 +188,10 @@
 			files = (
 				11DBF6FF1DC1DC53000C4FDD /* ViewController.m in Sources */,
 				112329FE1DCAD7D200B1911B /* GTMBase64.m in Sources */,
+				11227C7D1DEBB46300F72797 /* MainTarbBarController.m in Sources */,
 				112329F91DCAD6DC00B1911B /* YLUtils.m in Sources */,
 				11DBF6FC1DC1DC53000C4FDD /* AppDelegate.m in Sources */,
+				11227C7E1DEBB46300F72797 /* NavigationController.m in Sources */,
 				113641571DC3234B00D1DD71 /* VerifyCodeButton.m in Sources */,
 				11DBF6F91DC1DC53000C4FDD /* main.m in Sources */,
 			);
