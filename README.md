@@ -66,5 +66,32 @@ self.boundingRect(with: maxSize,options: options,attributes: attributes,context:
     //如置为NO，建议自己添加对应域名的校验逻辑。
     manager.securityPolicy.validatesDomainName = NO;
     
- ###https视乎自签名在ios9以下无法使用
- ###swift中tableview卡顿
+###https视乎自签名在ios9以下无法使用
+###swift中与js交互，关键代码
+```
+    func initJSContext() {
+        
+        let context : JSContext = self.showWebView.value(forKeyPath:"documentView.webView.mainFrame.javaScriptContext") as! JSContext
+        
+        //Swift  任何 Swift 函数类型都可以选择性地通过@convention标示符来进行注解，以此说明函数类型。默认的标注是 swift，表示这是一个正常的 Swift 函数。标注为block则说明这是 OC 中的block类型。这些一直都是自动桥接的，但是现在书写方式更加明确了。最后，c标注表明这是一个C语言函数指针。通过@convention(c)标注的函数类型在多数情况下表现正常，所以你可以像往常那样调用并传递他们。
+        let openItemDetail: @convention(block) () ->() = {
+            let args = JSContext.currentArguments()
+            let jsVal:JSValue = args?.first as! JSValue
+            MobClick.event("当家花旦明星产品商品图片")
+            print("\(jsVal.toString())")
+            DispatchQueue.main.async {
+                print("进入详情页，未写")
+            }
+        }
+        let openLogin:@convention(block) ()->() = {
+            
+        }
+        
+        context.setObject(unsafeBitCast(openItemDetail, to: AnyObject.self), forKeyedSubscript: "openItemDetail" as (NSCopying & NSObjectProtocol)!)
+
+
+        
+    }
+```
+ 
+ 
