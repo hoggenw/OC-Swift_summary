@@ -33,7 +33,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - https实验=======
+#pragma mark - https实验======= 存在一段时间以后无法调用的情况 不建议使用
 -(void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
         NSURL* baseURL = self.failedRequest.URL;
