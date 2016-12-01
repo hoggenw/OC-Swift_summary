@@ -194,11 +194,9 @@ extension String {
         return self
         
     }
-    //utf8编码 待定
+    //utf8编码
     func utf8encodedString() ->String {
-        var arr = [UInt8]()
-        arr += self.utf8
-        return String(bytes: arr,encoding: String.Encoding.utf8)!
+         return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
     }
     
     func navigationBarNeedChanged() {
