@@ -194,11 +194,31 @@ extension String {
         return self
         
     }
-    //utf8编码
+    //utf8编码 待定
     func utf8encodedString() ->String {
         var arr = [UInt8]()
         arr += self.utf8
         return String(bytes: arr,encoding: String.Encoding.utf8)!
+    }
+    
+    func navigationBarNeedChanged() {
+        UIView.animate(withDuration: 0.2, animations:{ [weak self]() in
+            UIApplication.shared.statusBarStyle = .lightContent
+            self?.topImageView.backgroundColor = UIColor.white.withAlphaComponent(0.8)
+            self?.topImageView.image =  UIImage(named:"ss")
+            
+            self?.messageButton.setImage( UIImage(named: (PSCommonUtils.ifMeiQiaNewMessage() ? "icon_message_b" :"01-alert")), for: .normal)
+            
+            self?.searchButton.setImage( UIImage(named:"01-seach"), for: .normal)
+            self?.titleLog.image = UIImage(named:"01-logo")
+            self?.cityButton.setImage(UIImage(named: "01-pulldown"), for: .normal)
+            self?.cityButton.setTitleColor(UIColor.blue, for: .normal)
+            
+            
+        })
+        
+        
+        
     }
     
 }
