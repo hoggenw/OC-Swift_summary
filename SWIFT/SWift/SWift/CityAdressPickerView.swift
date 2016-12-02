@@ -1,6 +1,6 @@
 //
 //  PSCityAdressPickerView.swift
-//  千机团Swift
+//  Swift
 //
 //  Created by 王留根 on 16/12/2.
 //  Copyright © 2016年 ios-mac. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PSCityAdressPickerView: UIView {
+class CityAdressPickerView: UIView {
     
     var doneButton = UIButton(type: .custom)
     var cancelButton = UIButton(type: .custom)
