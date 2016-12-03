@@ -140,9 +140,44 @@ extension PSCityAdressPickerView: UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if component == 0 {
+            let model = self.provinceArray[row]
+            self.cityArray = PSAreaModel.getArrayWithAreaCode(areaCode: model.code!, dataSourceArray: dataSourceArray)
+            //获取三级目录
+            let nullModle = PSAreaModel()
+            nullModle.name = ""
+            var midArray = [PSAreaModel]()
+            midArray.append(nullModle)
+            if cityArray.count > 0 {
+                let model1 = cityArray[0]
+                let array = PSAreaModel.getArrayWithAreaCode(areaCode: model1.code!, dataSourceArray: dataSourceArray)
+                midArray.append(contentsOf: array)
+            }
+            townArray = midArray
+            pickerView.reloadComponent(1)
+            pickerView.selectRow(0, inComponent: 1, animated: true)
+            pickerView.reloadComponent(2)
+            pickerView.selectRow(0, inComponent: 2, animated: true)
+        }
         
+        if component == 1 {
+            //获取三级目录
+            let nullModle = PSAreaModel()
+            nullModle.name = ""
+            var midArray = [PSAreaModel]()
+            midArray.append(nullModle)
+            if cityArray.count > 0 {
+                let model1 = cityArray[0]
+                let array = PSAreaModel.getArrayWithAreaCode(areaCode: model1.code!, dataSourceArray: dataSourceArray)
+                midArray.append(contentsOf: array)
+            }
+            townArray = midArray
+            pickerView.reloadComponent(2)
+            pickerView.selectRow(0, inComponent: 2, animated: true)
+            
+        }
     }
-    
+
 }
 
 
