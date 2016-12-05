@@ -95,3 +95,8 @@ self.boundingRect(with: maxSize,options: options,attributes: attributes,context:
 ```
  
  
+###navigationbar出现是动画的时间差问题解决
+```
+self.navigationController?.navigationBar.isHidden = true
+```
+另外，在出现页面要设置不隐藏或者隐藏
