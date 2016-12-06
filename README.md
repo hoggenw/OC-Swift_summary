@@ -100,3 +100,9 @@ self.boundingRect(with: maxSize,options: options,attributes: attributes,context:
 self.navigationController?.navigationBar.isHidden = true
 ```
 另外，在出现页面要设置不隐藏或者隐藏
+
+###cell不显示点击效果
+```
+cell.selectionStyle = UITableViewCellSelectionStyleNone;
+```
+###swift的第三方库snp在使用范围上有限制，如果不能使用可以用frame替代
