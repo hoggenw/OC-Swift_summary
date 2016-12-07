@@ -106,3 +106,10 @@ self.navigationController?.navigationBar.isHidden = true
 cell.selectionStyle = UITableViewCellSelectionStyleNone;
 ```
 ###swift的第三方库snp在使用范围上有限制，如果不能使用可以用frame替代
+
+###tableview显示背景图可以使用
+```
+image:@"Image-Blank-Item"];
+            self.tableView.backgroundView = self.blankView;
+```
+
