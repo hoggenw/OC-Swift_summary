@@ -200,6 +200,32 @@ class PSCommonUtils: NSObject {
         
         
     }
+    
+    class Device {
+        static func isPhone4() -> Bool {
+            let width = UIScreen.main.bounds.width
+            let height = UIScreen.main.bounds.height
+            return width <= 320 && height <= 480
+        }
+        
+        static func isPhone5() -> Bool {
+            let width = UIScreen.main.bounds.width
+            let height = UIScreen.main.bounds.height
+            return width <= 320 && height > 480
+        }
+        
+        static func isPhone6() -> Bool {
+            let width = UIScreen.main.bounds.width
+            return width > 320 && width < 414
+        }
+        
+        static func isPhone6Plus() -> Bool {
+            let width = UIScreen.main.bounds.width
+            return width >= 414
+        }
+        
+    }
+    
     func *******weakself在block里面的写法******() {
         bannerScroller?.tapActionBlock = {[weak self](index) in
             if (self?.dataArray[0].count)! > 0 {
@@ -220,6 +246,7 @@ class PSCommonUtils: NSObject {
             
         }
     }
+    
     
     
     
