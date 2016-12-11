@@ -12,6 +12,7 @@
 		111A8FEE1DF151B900504F3A /* CityAdressPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111A8FED1DF151B900504F3A /* CityAdressPickerView.swift */; };
 		112269311DFA42B400EABCEB /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112269301DFA42B400EABCEB /* Array+Extension.swift */; };
 		1122693C1DFC40F000EABCEB /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122693B1DFC40F000EABCEB /* UIButton+Extension.swift */; };
+		1122693E1DFCD3C900EABCEB /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1122693D1DFCD3C900EABCEB /* Date+Extension.swift */; };
 		112329F41DC8752000B1911B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112329F31DC8752000B1911B /* String+Extension.swift */; };
 		112956761DDC390200BEDC86 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112956751DDC390200BEDC86 /* CommonUtils.swift */; };
 		113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113641581DC3247900D1DD71 /* VerifyCodeButton.swift */; };
@@ -30,6 +31,7 @@
 		111A8FED1DF151B900504F3A /* CityAdressPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityAdressPickerView.swift; sourceTree = "<group>"; };
 		112269301DFA42B400EABCEB /* Array+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		1122693B1DFC40F000EABCEB /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		1122693D1DFCD3C900EABCEB /* Date+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		112329F31DC8752000B1911B /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		112956751DDC390200BEDC86 /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		113641581DC3247900D1DD71 /* VerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyCodeButton.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				112956751DDC390200BEDC86 /* CommonUtils.swift */,
 				112269301DFA42B400EABCEB /* Array+Extension.swift */,
 				1122693B1DFC40F000EABCEB /* UIButton+Extension.swift */,
+				1122693D1DFCD3C900EABCEB /* Date+Extension.swift */,
 			);
 			path = SWift;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			files = (
 				111A8FEE1DF151B900504F3A /* CityAdressPickerView.swift in Sources */,
 				119252F51DEEC89D00659281 /* PopupView.swift in Sources */,
+				1122693E1DFCD3C900EABCEB /* Date+Extension.swift in Sources */,
 				112329F41DC8752000B1911B /* String+Extension.swift in Sources */,
 				112269311DFA42B400EABCEB /* Array+Extension.swift in Sources */,
 				111196691DE1E44700F27154 /* Timer+Extension.swift in Sources */,
