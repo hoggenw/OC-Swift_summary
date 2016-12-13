@@ -2,8 +2,8 @@
 //  UIViewController+Extension.swift
 //  QianJiWang
 //
-//  Created by Pisen on 2016/10/19.
-//  Copyright © 2016年 Pisen. All rights reserved.
+//  Created by wlg on 2016/10/19.
+//  Copyright © 2016年 wlg. All rights reserved.
 //
 
 import UIKit

@@ -17,6 +17,7 @@
 		112956761DDC390200BEDC86 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112956751DDC390200BEDC86 /* CommonUtils.swift */; };
 		113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113641581DC3247900D1DD71 /* VerifyCodeButton.swift */; };
 		115E7FCC1DDABA4200DADCA9 /* MyVerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115E7FCB1DDABA4200DADCA9 /* MyVerifyCodeButton.swift */; };
+		11600D711DFFD96E002BC244 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */; };
 		119252F51DEEC89D00659281 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119252F41DEEC89D00659281 /* PopupView.swift */; };
 		11DBF6DA1DC1DBC0000C4FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6D91DC1DBC0000C4FDD /* AppDelegate.swift */; };
 		11DBF6DC1DC1DBC0000C4FDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6DB1DC1DBC0000C4FDD /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		112956751DDC390200BEDC86 /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		113641581DC3247900D1DD71 /* VerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyCodeButton.swift; sourceTree = "<group>"; };
 		115E7FCB1DDABA4200DADCA9 /* MyVerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVerifyCodeButton.swift; sourceTree = "<group>"; };
+		11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		119252F41DEEC89D00659281 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		11DBF6D61DC1DBC0000C4FDD /* SWift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DBF6D91DC1DBC0000C4FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 		11DBF6D81DC1DBC0000C4FDD /* SWift */ = {
 			isa = PBXGroup;
 			children = (
+				11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */,
 				111A8FED1DF151B900504F3A /* CityAdressPickerView.swift */,
 				119252F41DEEC89D00659281 /* PopupView.swift */,
 				111196661DE1E44700F27154 /* Dictionary+Extension.swift */,
@@ -174,6 +177,7 @@
 				119252F51DEEC89D00659281 /* PopupView.swift in Sources */,
 				1122693E1DFCD3C900EABCEB /* Date+Extension.swift in Sources */,
 				112329F41DC8752000B1911B /* String+Extension.swift in Sources */,
+				11600D711DFFD96E002BC244 /* UIViewController+Extension.swift in Sources */,
 				112269311DFA42B400EABCEB /* Array+Extension.swift in Sources */,
 				111196691DE1E44700F27154 /* Timer+Extension.swift in Sources */,
 				1122693C1DFC40F000EABCEB /* UIButton+Extension.swift in Sources */,
