@@ -113,3 +113,10 @@ image:@"Image-Blank-Item"];
             self.tableView.backgroundView = self.blankView;
 ```
 
+###cell复用的正确打开方式
+```
+            var  cellLevel3:PSLeftLevelThirdCell? = tableView.dequeueReusableCell(withIdentifier: "PSLeftLevelThirdCell") as? PSLeftLevelThirdCell
+            if cellLevel3 == nil {
+                cellLevel3 = PSLeftLevelThirdCell(style: .subtitle, reuseIdentifier: "PSLeftLevelThirdCell")
+            }
+```
