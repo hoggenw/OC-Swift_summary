@@ -1,6 +1,6 @@
 //
 //  UIViewController+Extension.swift
-//  QianJiWang
+//  
 //
 //  Created by wlg on 2016/10/19.
 //  Copyright © 2016年 wlg. All rights reserved.

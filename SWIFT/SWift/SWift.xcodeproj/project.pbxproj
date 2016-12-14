@@ -18,6 +18,17 @@
 		113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113641581DC3247900D1DD71 /* VerifyCodeButton.swift */; };
 		115E7FCC1DDABA4200DADCA9 /* MyVerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115E7FCB1DDABA4200DADCA9 /* MyVerifyCodeButton.swift */; };
 		11600D711DFFD96E002BC244 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */; };
+		116C78D91E00F1F5009FCB25 /* ScanQRCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78D71E00F1F5009FCB25 /* ScanQRCodesViewController.swift */; };
+		116C78DA1E00F1F5009FCB25 /* ScanResultTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78D81E00F1F5009FCB25 /* ScanResultTextViewController.swift */; };
+		116C78E71E00F302009FCB25 /* ScanQRCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78DD1E00F302009FCB25 /* ScanQRCodesViewController.swift */; };
+		116C78E81E00F302009FCB25 /* ScanResultTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78DE1E00F302009FCB25 /* ScanResultTextViewController.swift */; };
+		116C78E91E00F302009FCB25 /* LBXPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78E01E00F302009FCB25 /* LBXPermissions.swift */; };
+		116C78EA1E00F302009FCB25 /* LBXScanLineAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78E11E00F302009FCB25 /* LBXScanLineAnimation.swift */; };
+		116C78EB1E00F302009FCB25 /* LBXScanNetAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78E21E00F302009FCB25 /* LBXScanNetAnimation.swift */; };
+		116C78EC1E00F302009FCB25 /* LBXScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78E31E00F302009FCB25 /* LBXScanView.swift */; };
+		116C78ED1E00F302009FCB25 /* LBXScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78E41E00F302009FCB25 /* LBXScanViewController.swift */; };
+		116C78EE1E00F302009FCB25 /* LBXScanViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78E51E00F302009FCB25 /* LBXScanViewStyle.swift */; };
+		116C78EF1E00F302009FCB25 /* LBXScanWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78E61E00F302009FCB25 /* LBXScanWrapper.swift */; };
 		119252F51DEEC89D00659281 /* PopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 119252F41DEEC89D00659281 /* PopupView.swift */; };
 		11DBF6DA1DC1DBC0000C4FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6D91DC1DBC0000C4FDD /* AppDelegate.swift */; };
 		11DBF6DC1DC1DBC0000C4FDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11DBF6DB1DC1DBC0000C4FDD /* ViewController.swift */; };
@@ -38,6 +49,17 @@
 		113641581DC3247900D1DD71 /* VerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyCodeButton.swift; sourceTree = "<group>"; };
 		115E7FCB1DDABA4200DADCA9 /* MyVerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVerifyCodeButton.swift; sourceTree = "<group>"; };
 		11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		116C78D71E00F1F5009FCB25 /* ScanQRCodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRCodesViewController.swift; sourceTree = "<group>"; };
+		116C78D81E00F1F5009FCB25 /* ScanResultTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultTextViewController.swift; sourceTree = "<group>"; };
+		116C78DD1E00F302009FCB25 /* ScanQRCodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRCodesViewController.swift; sourceTree = "<group>"; };
+		116C78DE1E00F302009FCB25 /* ScanResultTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanResultTextViewController.swift; sourceTree = "<group>"; };
+		116C78E01E00F302009FCB25 /* LBXPermissions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXPermissions.swift; sourceTree = "<group>"; };
+		116C78E11E00F302009FCB25 /* LBXScanLineAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanLineAnimation.swift; sourceTree = "<group>"; };
+		116C78E21E00F302009FCB25 /* LBXScanNetAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanNetAnimation.swift; sourceTree = "<group>"; };
+		116C78E31E00F302009FCB25 /* LBXScanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanView.swift; sourceTree = "<group>"; };
+		116C78E41E00F302009FCB25 /* LBXScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewController.swift; sourceTree = "<group>"; };
+		116C78E51E00F302009FCB25 /* LBXScanViewStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanViewStyle.swift; sourceTree = "<group>"; };
+		116C78E61E00F302009FCB25 /* LBXScanWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LBXScanWrapper.swift; sourceTree = "<group>"; };
 		119252F41DEEC89D00659281 /* PopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupView.swift; sourceTree = "<group>"; };
 		11DBF6D61DC1DBC0000C4FDD /* SWift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SWift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		11DBF6D91DC1DBC0000C4FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +81,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		116C78D51E00F1F5009FCB25 /* ScanQRCodes */ = {
+			isa = PBXGroup;
+			children = (
+				116C78D61E00F1F5009FCB25 /* Controller */,
+			);
+			path = ScanQRCodes;
+			sourceTree = "<group>";
+		};
+		116C78D61E00F1F5009FCB25 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				116C78D71E00F1F5009FCB25 /* ScanQRCodesViewController.swift */,
+				116C78D81E00F1F5009FCB25 /* ScanResultTextViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		116C78DB1E00F302009FCB25 /* ScanQRCodes */ = {
+			isa = PBXGroup;
+			children = (
+				116C78DC1E00F302009FCB25 /* Controller */,
+			);
+			path = ScanQRCodes;
+			sourceTree = "<group>";
+		};
+		116C78DC1E00F302009FCB25 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				116C78DD1E00F302009FCB25 /* ScanQRCodesViewController.swift */,
+				116C78DE1E00F302009FCB25 /* ScanResultTextViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		116C78DF1E00F302009FCB25 /* QRScan */ = {
+			isa = PBXGroup;
+			children = (
+				116C78E01E00F302009FCB25 /* LBXPermissions.swift */,
+				116C78E11E00F302009FCB25 /* LBXScanLineAnimation.swift */,
+				116C78E21E00F302009FCB25 /* LBXScanNetAnimation.swift */,
+				116C78E31E00F302009FCB25 /* LBXScanView.swift */,
+				116C78E41E00F302009FCB25 /* LBXScanViewController.swift */,
+				116C78E51E00F302009FCB25 /* LBXScanViewStyle.swift */,
+				116C78E61E00F302009FCB25 /* LBXScanWrapper.swift */,
+			);
+			path = QRScan;
+			sourceTree = "<group>";
+		};
 		11DBF6CD1DC1DBC0000C4FDD = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +148,9 @@
 		11DBF6D81DC1DBC0000C4FDD /* SWift */ = {
 			isa = PBXGroup;
 			children = (
+				116C78DB1E00F302009FCB25 /* ScanQRCodes */,
+				116C78DF1E00F302009FCB25 /* QRScan */,
+				116C78D51E00F1F5009FCB25 /* ScanQRCodes */,
 				11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */,
 				111A8FED1DF151B900504F3A /* CityAdressPickerView.swift */,
 				119252F41DEEC89D00659281 /* PopupView.swift */,
@@ -173,19 +246,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				116C78EA1E00F302009FCB25 /* LBXScanLineAnimation.swift in Sources */,
+				116C78EF1E00F302009FCB25 /* LBXScanWrapper.swift in Sources */,
 				111A8FEE1DF151B900504F3A /* CityAdressPickerView.swift in Sources */,
+				116C78E91E00F302009FCB25 /* LBXPermissions.swift in Sources */,
 				119252F51DEEC89D00659281 /* PopupView.swift in Sources */,
+				116C78ED1E00F302009FCB25 /* LBXScanViewController.swift in Sources */,
 				1122693E1DFCD3C900EABCEB /* Date+Extension.swift in Sources */,
 				112329F41DC8752000B1911B /* String+Extension.swift in Sources */,
 				11600D711DFFD96E002BC244 /* UIViewController+Extension.swift in Sources */,
+				116C78EE1E00F302009FCB25 /* LBXScanViewStyle.swift in Sources */,
 				112269311DFA42B400EABCEB /* Array+Extension.swift in Sources */,
 				111196691DE1E44700F27154 /* Timer+Extension.swift in Sources */,
+				116C78E71E00F302009FCB25 /* ScanQRCodesViewController.swift in Sources */,
 				1122693C1DFC40F000EABCEB /* UIButton+Extension.swift in Sources */,
 				111196681DE1E44700F27154 /* Dictionary+Extension.swift in Sources */,
+				116C78DA1E00F1F5009FCB25 /* ScanResultTextViewController.swift in Sources */,
 				11DBF6DC1DC1DBC0000C4FDD /* ViewController.swift in Sources */,
 				113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */,
+				116C78E81E00F302009FCB25 /* ScanResultTextViewController.swift in Sources */,
+				116C78D91E00F1F5009FCB25 /* ScanQRCodesViewController.swift in Sources */,
 				115E7FCC1DDABA4200DADCA9 /* MyVerifyCodeButton.swift in Sources */,
+				116C78EC1E00F302009FCB25 /* LBXScanView.swift in Sources */,
 				112956761DDC390200BEDC86 /* CommonUtils.swift in Sources */,
+				116C78EB1E00F302009FCB25 /* LBXScanNetAnimation.swift in Sources */,
 				11DBF6DA1DC1DBC0000C4FDD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
