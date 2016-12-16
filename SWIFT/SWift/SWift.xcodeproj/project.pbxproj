@@ -35,6 +35,8 @@
 		11DBF6DF1DC1DBC0000C4FDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11DBF6DD1DC1DBC0000C4FDD /* Main.storyboard */; };
 		11DBF6E11DC1DBC0000C4FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11DBF6E01DC1DBC0000C4FDD /* Assets.xcassets */; };
 		11DBF6E41DC1DBC0000C4FDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11DBF6E21DC1DBC0000C4FDD /* LaunchScreen.storyboard */; };
+		11F215861E037EE200D47722 /* TESTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F215851E037EE200D47722 /* TESTViewController.swift */; };
+		11F215881E037F4C00D47722 /* TESTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F215871E037F4C00D47722 /* TESTView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		11DBF6E01DC1DBC0000C4FDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		11DBF6E31DC1DBC0000C4FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		11DBF6E51DC1DBC0000C4FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		11F215851E037EE200D47722 /* TESTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TESTViewController.swift; sourceTree = "<group>"; };
+		11F215871E037F4C00D47722 /* TESTView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TESTView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +173,8 @@
 				112269301DFA42B400EABCEB /* Array+Extension.swift */,
 				1122693B1DFC40F000EABCEB /* UIButton+Extension.swift */,
 				1122693D1DFCD3C900EABCEB /* Date+Extension.swift */,
+				11F215851E037EE200D47722 /* TESTViewController.swift */,
+				11F215871E037F4C00D47722 /* TESTView.swift */,
 			);
 			path = SWift;
 			sourceTree = "<group>";
@@ -264,12 +270,14 @@
 				116C78DA1E00F1F5009FCB25 /* ScanResultTextViewController.swift in Sources */,
 				11DBF6DC1DC1DBC0000C4FDD /* ViewController.swift in Sources */,
 				113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */,
+				11F215881E037F4C00D47722 /* TESTView.swift in Sources */,
 				116C78E81E00F302009FCB25 /* ScanResultTextViewController.swift in Sources */,
 				116C78D91E00F1F5009FCB25 /* ScanQRCodesViewController.swift in Sources */,
 				115E7FCC1DDABA4200DADCA9 /* MyVerifyCodeButton.swift in Sources */,
 				116C78EC1E00F302009FCB25 /* LBXScanView.swift in Sources */,
 				112956761DDC390200BEDC86 /* CommonUtils.swift in Sources */,
 				116C78EB1E00F302009FCB25 /* LBXScanNetAnimation.swift in Sources */,
+				11F215861E037EE200D47722 /* TESTViewController.swift in Sources */,
 				11DBF6DA1DC1DBC0000C4FDD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
