@@ -37,6 +37,7 @@
 		11DBF6E41DC1DBC0000C4FDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11DBF6E21DC1DBC0000C4FDD /* LaunchScreen.storyboard */; };
 		11F215861E037EE200D47722 /* TESTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F215851E037EE200D47722 /* TESTViewController.swift */; };
 		11F215881E037F4C00D47722 /* TESTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F215871E037F4C00D47722 /* TESTView.swift */; };
+		11F2158A1E03876D00D47722 /* YLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F215891E03876D00D47722 /* YLViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		11DBF6E51DC1DBC0000C4FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11F215851E037EE200D47722 /* TESTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TESTViewController.swift; sourceTree = "<group>"; };
 		11F215871E037F4C00D47722 /* TESTView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TESTView.swift; sourceTree = "<group>"; };
+		11F215891E03876D00D47722 /* YLViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YLViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +177,7 @@
 				1122693D1DFCD3C900EABCEB /* Date+Extension.swift */,
 				11F215851E037EE200D47722 /* TESTViewController.swift */,
 				11F215871E037F4C00D47722 /* TESTView.swift */,
+				11F215891E03876D00D47722 /* YLViewController.swift */,
 			);
 			path = SWift;
 			sourceTree = "<group>";
@@ -257,6 +260,7 @@
 				111A8FEE1DF151B900504F3A /* CityAdressPickerView.swift in Sources */,
 				116C78E91E00F302009FCB25 /* LBXPermissions.swift in Sources */,
 				119252F51DEEC89D00659281 /* PopupView.swift in Sources */,
+				11F2158A1E03876D00D47722 /* YLViewController.swift in Sources */,
 				116C78ED1E00F302009FCB25 /* LBXScanViewController.swift in Sources */,
 				1122693E1DFCD3C900EABCEB /* Date+Extension.swift in Sources */,
 				112329F41DC8752000B1911B /* String+Extension.swift in Sources */,
