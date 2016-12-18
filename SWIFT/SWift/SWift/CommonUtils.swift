@@ -264,6 +264,22 @@ class PSCommonUtils: NSObject {
         }
     }
     
+    // 带确定按钮的提示框
+    public class func showAlert(_ title: String?, _ message: String?, _ clickAction:( () -> Void )?, _ showVC: UIViewController? = nil) -> Void {
+        let alertVC = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let doneAction = UIAlertAction.init(title: "确定", style: UIAlertActionStyle.default) { (action) in
+            clickAction?();
+        }
+        alertVC.addAction(doneAction)
+        
+        if nil == showVC {
+            let rootVC = UIApplication.shared.keyWindow?.rootViewController
+            rootVC?.present(alertVC, animated: true, completion: nil)
+        } else {
+            showVC?.present(alertVC, animated: true, completion: nil)
+        }
+        
+    }
     
     
     
