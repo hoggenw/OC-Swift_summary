@@ -120,4 +120,14 @@
     return result;
 }
 
+/**
+ *  将富文本转换成HTML
+ *  added by dwk
+ */
++ (NSString *)psk_converRichTextToHTML:(NSAttributedString *)attributedString {
+    NSDictionary *exportParams = @{NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType};
+    NSData *htmlData = [attributedString dataFromRange:NSMakeRange(0, attributedString.length) documentAttributes:exportParams error:nil];
+    return [[NSString alloc] initWithData:htmlData encoding:NSUTF8StringEncoding];
+}
+
 @end
