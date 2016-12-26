@@ -137,3 +137,6 @@ image:@"Image-Blank-Item"];
 然后在**TemplateInfo.plist**文件中添加新的模板
 ![File Templates截图](Resource/截图4.png)
 ![File Templates截图](Resource/截图5.png)
+
+##关于项目
+项目应该遵循‘低耦合，高内聚’是设计原则，避免统一模块或者类或者方法实现多个不相干的功能，同时一个模块的功能实现不应该穿插入其他模块，多使用代理（block也可以，建议代理）来实现模块之间的解耦和。不强行将不同性质功能的方法构造成同一模块。
