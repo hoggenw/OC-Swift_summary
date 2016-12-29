@@ -23,7 +23,7 @@ class ViewController: UIViewController {
     //数组排序相关
     func compareCategoryModelArray(modelArray:[PSCategoryModel]) -> [PSCategoryModel]  {
         
-        //降序
+        //sheng序
         let returnArray = modelArray.sorted { (model1, model2) -> Bool in
             return model1.sequence! < model2.sequence!
         }
