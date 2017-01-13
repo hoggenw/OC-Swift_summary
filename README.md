@@ -140,3 +140,10 @@ image:@"Image-Blank-Item"];
 
 ##关于项目
 项目应该遵循‘低耦合，高内聚’是设计原则，避免统一模块或者类或者方法实现多个不相干的功能，同时一个模块的功能实现不应该穿插入其他模块，多使用代理（block也可以，建议代理）来实现模块之间的解耦和。不强行将不同性质功能的方法构造成同一模块。
+
+###Label加载HTML字符串
+```
+                if let contenString = newsDetail?.Content {
+                    self.contentLabel.attributedText = try? NSAttributedString.init(data: (contenString.data(using: .unicode))!, options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType ], documentAttributes: nil)// newsDetail?.Content?.replacingOccurrences(of: "<br />\n<br />\n", with: "")
+                }
+```
