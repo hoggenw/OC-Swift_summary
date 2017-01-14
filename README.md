@@ -147,3 +147,18 @@ image:@"Image-Blank-Item"];
                     self.contentLabel.attributedText = try? NSAttributedString.init(data: (contenString.data(using: .unicode))!, options: [ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType ], documentAttributes: nil)// newsDetail?.Content?.replacingOccurrences(of: "<br />\n<br />\n", with: "")
                 }
 ```
+##关于视图优化
+1.实际开发中，本地的图片比较好把控，只需要写好对应的尺寸就好了，但是对于download下来的图片，可以在加载完后进行size处理，以满足imageView frame。特别是对于很多app，有大量的tableview，如果进行处理，则会大幅度提高流畅度。
+
+2.屏幕上的每个像素点的颜色是由当前像素点上的多层layer(如果存在)共同决定的，GPU会进行计算出混合颜色的RGB值，最终显示在屏幕上。而这需要让GPU计算，所以我们要尽量避免设置alpha，这样GPU会忽略下面所有的layer，节约计算量。
+
+3.避免去做触发的动作：
+
+•	重写drawRect方法
+
+•	masksToBounds
+
+•	其他一些手动触发离屏渲染的动作
+
+
+	
