@@ -162,3 +162,13 @@ image:@"Image-Blank-Item"];
 
 
 	
+###获取某个目录下所有文件名
+```
+        let scanViewBunlde: Bundle = Bundle.init(for: YLScanViewController.self)
+        let returnBundel: Bundle = Bundle(path: scanViewBunlde.path(forResource: "YLSwiftScan", ofType: "bundle")!)!
+//        let fileManager = FileManager.default
+//        let filePathDicEnumerator = fileManager.enumerator(atPath: scanViewBunlde.bundlePath)
+//        while let file = filePathDicEnumerator?.nextObject() {
+//            print("\((file as AnyObject).description)")
+//        }
+```
