@@ -156,3 +156,32 @@ public extension Collection where Iterator.Element == KingfisherOptionsInfoItem 
 //
 
 ```
+
+#CacheSerializer
+
+```
+//Image 序列化 Data。通过Data获取图片format,返回不同格式下图片。能实现PNG，
+//JPEG，GIF图片格式，其他图片格式默认返回PNG格式
+ public func data(with image: Image, original: Data?) -> Data? {
+        let imageFormat = original?.kf.imageFormat ?? .unknown
+        
+        let data: Data?
+        switch imageFormat {
+        case .PNG: data = image.kf.pngRepresentation()
+        case .JPEG: data = image.kf.jpegRepresentation(compressionQuality: 1.0)
+        case .GIF: data = image.kf.gifRepresentation()
+        case .unknown: data = original ?? image.kf.normalized.kf.pngRepresentation()
+        }
+        
+        return data
+    }
+  //Data 序列化成Image。 如果是GIF图片，preloadAllGIFData 用于判断图片显示方
+  //式。 false： 不会加载所有GIF图片数据，只显示GIF中的第一张图片，true：将所有
+  //图片数据加载到内存，显示GIF动态图片  
+    public func image(with data: Data, options: KingfisherOptionsInfo?) -> Image? {
+        let scale = (options ?? KingfisherEmptyOptionsInfo).scaleFactor
+        let preloadAllGIFData = (options ?? KingfisherEmptyOptionsInfo).preloadAllGIFData
+        
+        return Kingfisher<Image>.image(data: data, scale: scale, preloadAllGIFData: preloadAllGIFData)
+    }
+```
