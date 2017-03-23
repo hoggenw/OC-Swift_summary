@@ -346,3 +346,285 @@
         return (urlsToDelete, diskCacheSize, cachedFiles)
     }
 ```
+
+#imageDownloader
+
+```
+    //作用ImageDownloader往往要处理多个URL的下载任务，它的fetchLoads属性是一个[URL: ImageFetchLoad]类型的字典，存储不同 URL 及其 ImageFetchLoad 之间的对应关系
+    class ImageFetchLoad {
+        //嵌套包含进度和完成回调
+        var contents = [(callback: CallbackPair, options: KingfisherOptionsInfo)]()
+        //数据存储
+        var responseData = NSMutableData()
+
+        var downloadTaskCount = 0
+        var downloadTask: RetrieveImageDownloadTask?
+    }
+    
+       //根据URL获取ImageFetchLoad 的方法
+    func fetchLoad(for url: URL) -> ImageFetchLoad? {
+        var fetchLoad: ImageFetchLoad?
+        barrierQueue.sync { fetchLoad = fetchLoads[url] }
+        return fetchLoad
+    }
+    
+```
+这是外部调用ImageDownloader最常用的方法 配置好请求参数：Time 、URL、 URLRequest ，确保请求的前提条件 主要是setup方法
+
+```
+    func downloadImage(with url: URL,
+              retrieveImageTask: RetrieveImageTask?,
+                        options: KingfisherOptionsInfo?,
+                  progressBlock: ImageDownloaderProgressBlock?,
+              completionHandler: ImageDownloaderCompletionHandler?) -> RetrieveImageDownloadTask?
+    {
+        if let retrieveImageTask = retrieveImageTask, retrieveImageTask.cancelledBeforeDownloadStarting {
+            completionHandler?(nil, NSError(domain: KingfisherErrorDomain, code: KingfisherError.downloadCancelledBeforeStarting.rawValue, userInfo: nil), nil, nil)
+            return nil
+        }
+        
+        let timeout = self.downloadTimeout == 0.0 ? 15.0 : self.downloadTimeout
+        
+        // We need to set the URL as the load key. So before setup progress, we need to ask the `requestModifier` for a final URL.
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeout)
+        request.httpShouldUsePipelining = requestsUsePipeling
+
+        if let modifier = options?.modifier {
+            guard let r = modifier.modified(for: request) else {
+                completionHandler?(nil, NSError(domain: KingfisherErrorDomain, code: KingfisherError.downloadCancelledBeforeStarting.rawValue, userInfo: nil), nil, nil)
+                return nil
+            }
+            request = r
+        }
+        
+        // There is a possiblility that request modifier changed the url to `nil` or empty.
+        guard let url = request.url, !url.absoluteString.isEmpty else {
+            completionHandler?(nil, NSError(domain: KingfisherErrorDomain, code: KingfisherError.invalidURL.rawValue, userInfo: nil), nil, nil)
+            return nil
+        }
+        
+        var downloadTask: RetrieveImageDownloadTask?
+        ////根据传过来的fetchLoad 是否开启下载任务。若没有根据session 生成 dataTask,在进一步包装成RetrieveImageDownloadTask，传给fetchLoad的downloadTask属性 配置好任务优先级，开启下载任务，如果已开启下载，下载次数加1，设置传给外部的retrieveImageTask的downloadTask
+        setup(progressBlock: progressBlock, with: completionHandler, for: url, options: options) {(session, fetchLoad) -> Void in
+            if fetchLoad.downloadTask == nil {
+                let dataTask = session.dataTask(with: request)
+                ////设置下载任务
+                fetchLoad.downloadTask = RetrieveImageDownloadTask(internalTask: dataTask, ownerDownloader: self)
+                 //设置下载任务优先级
+                dataTask.priority = options?.downloadPriority ?? URLSessionTask.defaultPriority
+                ////开启下载任务
+                dataTask.resume()
+                
+                // Hold self while the task is executing.
+                //下载期间确保sessionHandler 持有 ImageDownloader
+                self.sessionHandler.downloadHolder = self
+            }
+            //下载次数加1
+            fetchLoad.downloadTaskCount += 1
+            downloadTask = fetchLoad.downloadTask
+            
+            retrieveImageTask?.downloadTask = downloadTask
+        }
+        return downloadTask
+    }
+    
+        func setup(progressBlock: ImageDownloaderProgressBlock?, with completionHandler: ImageDownloaderCompletionHandler?, for url: URL, options: KingfisherOptionsInfo?, started: ((URLSession, ImageFetchLoad) -> Void)) {
+        //首先barrierQueue.sync 确保ImageFetchLoad 读写安全，根据传入的URL获取对应的ImageFetchLoad 设置callbackPair并更新contents ，开启下载
+        barrierQueue.sync(flags: .barrier) {
+            let loadObjectForURL = fetchLoads[url] ?? ImageFetchLoad()
+            let callbackPair = (progressBlock: progressBlock, completionHandler: completionHandler)
+            
+            loadObjectForURL.contents.append((callbackPair, options ?? KingfisherEmptyOptionsInfo))
+            
+            fetchLoads[url] = loadObjectForURL
+            
+            if let session = session {
+                started(session, loadObjectForURL)
+            }
+        }
+    }
+```
+
+取消下载
+
+```
+    func cancelDownloadingTask(_ task: RetrieveImageDownloadTask) {
+        barrierQueue.sync {
+            if let URL = task.internalTask.originalRequest?.url, let imageFetchLoad = self.fetchLoads[URL] {
+                //更新下载次数
+                imageFetchLoad.downloadTaskCount -= 1
+                if imageFetchLoad.downloadTaskCount == 0 {
+                    task.internalTask.cancel()
+                }
+            }
+        }
+    }
+    
+```
+
+NSURLSessionDataDelegate,下载生命周期操作
+
+```
+    //下载过程中接收Response
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
+        ////下载过程中确保ImageDownloader 一直持有
+        guard let downloader = downloadHolder else {
+            completionHandler(.cancel)
+            return
+        }
+        ////返回状态码判断
+        if let statusCode = (response as? HTTPURLResponse)?.statusCode,
+           let url = dataTask.originalRequest?.url,
+            !(downloader.delegate ?? downloader).isValidStatusCode(statusCode, for: downloader)
+        {
+            let error = NSError(domain: KingfisherErrorDomain,
+                                code: KingfisherError.invalidStatusCode.rawValue,
+                                userInfo: [KingfisherErrorStatusCodeKey: statusCode, NSLocalizedDescriptionKey: HTTPURLResponse.localizedString(forStatusCode: statusCode)])
+            ////返回错误 首先清除ImageFetchLoad
+            callCompletionHandlerFailure(error: error, url: url)
+        }
+        ////继续请求数据
+        completionHandler(.allow)
+    }
+    //下载过程中接收到数据
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+
+        guard let downloader = downloadHolder else {
+            return
+        }
+        //添加数据到指定ImageFetchLoad
+        if let url = dataTask.originalRequest?.url, let fetchLoad = downloader.fetchLoad(for: url) {
+            fetchLoad.responseData.append(data)
+            //下载进度回调
+            if let expectedLength = dataTask.response?.expectedContentLength {
+                for content in fetchLoad.contents {
+                    DispatchQueue.main.async {
+                        content.callback.progressBlock?(Int64(fetchLoad.responseData.length), expectedLength)
+                    }
+                }
+            }
+        }
+    }
+    //下载结束
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        //// URL 一致性判断
+        guard let url = task.originalRequest?.url else {
+            return
+        }
+        // error 判断
+        guard error == nil else {
+            callCompletionHandlerFailure(error: error!, url: url)
+            return
+        }
+        //图片处理
+        processImage(for: task, url: url)
+    }
+    
+    /**
+    This method is exposed since the compiler requests. Do not call it.
+    */
+    //会话需要认证
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        guard let downloader = downloadHolder else {
+            return
+        }
+        
+        downloader.authenticationChallengeResponder?.downloader(downloader, didReceive: challenge, completionHandler: completionHandler)
+    }
+    
+    private func cleanFetchLoad(for url: URL) {
+        guard let downloader = downloadHolder else {
+            return
+        }
+        
+        downloader.clean(for: url)
+        
+        if downloader.fetchLoads.isEmpty {
+            downloadHolder = nil
+        }
+    }
+    //返回错误信息
+    private func callCompletionHandlerFailure(error: Error, url: URL) {
+        guard let downloader = downloadHolder, let fetchLoad = downloader.fetchLoad(for: url) else {
+            return
+        }
+        
+        // We need to clean the fetch load first, before actually calling completion handler.
+        cleanFetchLoad(for: url)
+        
+        for content in fetchLoad.contents {
+            content.options.callbackDispatchQueue.safeAsync {
+                content.callback.completionHandler?(nil, error as NSError, url, nil)
+            }
+        }
+    }
+```
+
+图片数据处理
+
+```
+    private func processImage(for task: URLSessionTask, url: URL) {
+
+        guard let downloader = downloadHolder else {
+            return
+        }
+        
+        // We are on main queue when receiving this.
+        downloader.processQueue.async {
+            
+            guard let fetchLoad = downloader.fetchLoad(for: url) else {
+                return
+            }
+            //首先清除ImageDownloader
+            self.cleanFetchLoad(for: url)
+            
+            let data = fetchLoad.responseData as Data
+            
+            // Cache the processed images. So we do not need to re-process the image if using the same processor.
+            // Key is the identifier of processor.
+            var imageCache: [String: Image] = [:]
+            for content in fetchLoad.contents {
+                
+                let options = content.options
+                let completionHandler = content.callback.completionHandler
+                let callbackQueue = options.callbackDispatchQueue
+                
+                let processor = options.processor
+                
+                var image = imageCache[processor.identifier]
+                if image == nil {
+                    //合成图片
+                    image = processor.process(item: .data(data), options: options)
+                    
+                    // Add the processed image to cache. 
+                    // If `image` is nil, nothing will happen (since the key is not existing before).
+                    imageCache[processor.identifier] = image
+                }
+                
+                if let image = image {
+                    
+                    downloader.delegate?.imageDownloader(downloader, didDownload: image, for: url, with: task.response)
+                    //后台编码
+                    if options.backgroundDecode {
+                        let decodedImage = image.kf.decoded(scale: options.scaleFactor)
+                        callbackQueue.safeAsync { completionHandler?(decodedImage, nil, url, data) }
+                    } else {
+                        callbackQueue.safeAsync { completionHandler?(image, nil, url, data) }
+                    }
+                    
+                } else {
+                     // 304 状态码 没有图像数据下载
+                    if let res = task.response as? HTTPURLResponse , res.statusCode == 304 {
+                        let notModified = NSError(domain: KingfisherErrorDomain, code: KingfisherError.notModified.rawValue, userInfo: nil)
+                        completionHandler?(nil, notModified, url, nil)
+                        continue
+                    }
+                     //返回不是图片数据 或者数据被破坏
+                    let badData = NSError(domain: KingfisherErrorDomain, code: KingfisherError.badData.rawValue, userInfo: nil)
+                    callbackQueue.safeAsync { completionHandler?(nil, badData, url, nil) }
+                }
+            }
+        }
+    }
+}
+```
