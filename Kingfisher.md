@@ -185,3 +185,239 @@ public extension Collection where Iterator.Element == KingfisherOptionsInfoItem 
         return Kingfisher<Image>.image(data: data, scale: scale, preloadAllGIFData: preloadAllGIFData)
     }
 ```
+
+#ImagePrefetcher
+
+初始化
+
+```
+  /// The maximum concurrent downloads to use when prefetching images. Default is 5.
+    public var maxConcurrentDownloads = 5
+    //总的任务量
+    private let prefetchResources: [Resource]
+    private let optionsInfo: KingfisherOptionsInfo
+    private var progressBlock: PrefetcherProgressBlock?
+    private var completionHandler: PrefetcherCompletionHandler?
+    
+    private var tasks = [URL: RetrieveImageDownloadTask]()
+    //待办的
+    private var pendingResources: ArraySlice<Resource>
+    //跳过的
+    private var skippedResources = [Resource]()
+    //完成的
+    private var completedResources = [Resource]()
+    //失败的
+    private var failedResources = [Resource]()
+    
+    private var stopped = false
+    
+    // The created manager used for prefetch. We will use the helper method in manager.
+    private let manager: KingfisherManager
+    
+    private var finished: Bool {
+        return failedResources.count + skippedResources.count + completedResources.count == prefetchResources.count && self.tasks.isEmpty
+    }
+    
+    /**
+     Init an image prefetcher with an array of URLs.
+     
+     The prefetcher should be initiated with a list of prefetching targets. The URLs list is immutable. 
+     After you get a valid `ImagePrefetcher` object, you could call `start()` on it to begin the prefetching process.
+     The images already cached will be skipped without downloading again.
+     
+     - parameter urls:              The URLs which should be prefetched.
+     - parameter options:           A dictionary could control some behaviors. See `KingfisherOptionsInfo` for more.
+     - parameter progressBlock:     Called every time an resource is downloaded, skipped or cancelled.
+     - parameter completionHandler: Called when the whole prefetching process finished.
+     
+     - returns: An `ImagePrefetcher` object.
+     
+     - Note: By default, the `ImageDownloader.defaultDownloader` and `ImageCache.defaultCache` will be used as 
+     the downloader and cache target respectively. You can specify another downloader or cache by using a customized `KingfisherOptionsInfo`.
+     Both the progress and completion block will be invoked in main thread. The `CallbackDispatchQueue` in `optionsInfo` will be ignored in this method.
+     */
+    //URL数组初始化ImagePrefetcher
+    public convenience init(urls: [URL],
+                         options: KingfisherOptionsInfo? = nil,
+                   progressBlock: PrefetcherProgressBlock? = nil,
+               completionHandler: PrefetcherCompletionHandler? = nil)
+    {
+        let resources: [Resource] = urls.map { $0 }
+        self.init(resources: resources, options: options, progressBlock: progressBlock, completionHandler: completionHandler)
+    }
+    
+    /**
+     Init an image prefetcher with an array of resources.
+     
+     The prefetcher should be initiated with a list of prefetching targets. The resources list is immutable.
+     After you get a valid `ImagePrefetcher` object, you could call `start()` on it to begin the prefetching process.
+     The images already cached will be skipped without downloading again.
+     
+     - parameter resources:         The resources which should be prefetched. See `Resource` type for more.
+     - parameter options:           A dictionary could control some behaviors. See `KingfisherOptionsInfo` for more.
+     - parameter progressBlock:     Called every time an resource is downloaded, skipped or cancelled.
+     - parameter completionHandler: Called when the whole prefetching process finished.
+     
+     - returns: An `ImagePrefetcher` object.
+     
+     - Note: By default, the `ImageDownloader.defaultDownloader` and `ImageCache.defaultCache` will be used as
+     the downloader and cache target respectively. You can specify another downloader or cache by using a customized `KingfisherOptionsInfo`.
+     Both the progress and completion block will be invoked in main thread. The `CallbackDispatchQueue` in `optionsInfo` will be ignored in this method.
+     */
+    public init(resources: [Resource],
+                  options: KingfisherOptionsInfo? = nil,
+            progressBlock: PrefetcherProgressBlock? = nil,
+        completionHandler: PrefetcherCompletionHandler? = nil)
+    {
+        prefetchResources = resources
+        pendingResources = ArraySlice(resources)
+        
+        // We want all callbacks from main queue, so we ignore the call back queue in options
+        let optionsInfoWithoutQueue = options?.removeAllMatchesIgnoringAssociatedValue(.callbackDispatchQueue(nil))
+        self.optionsInfo = optionsInfoWithoutQueue ?? KingfisherEmptyOptionsInfo
+        
+        let cache = self.optionsInfo.targetCache
+        let downloader = self.optionsInfo.downloader
+        manager = KingfisherManager(downloader: downloader, cache: cache)
+        
+        self.progressBlock = progressBlock
+        self.completionHandler = completionHandler
+    }
+```
+
+开始下载和停止
+
+```
+    /**
+     Start to download the resources and cache them. This can be useful for background downloading
+     of assets that are required for later use in an app. This code will not try and update any UI
+     with the results of the process.
+     */
+    public func start()
+    {
+        // Since we want to handle the resources cancellation in main thread only.
+        DispatchQueue.main.safeAsync {
+            
+            guard !self.stopped else {
+                assertionFailure("You can not restart the same prefetcher. Try to create a new prefetcher.")
+                self.handleComplete()
+                return
+            }
+            
+            guard self.maxConcurrentDownloads > 0 else {
+                assertionFailure("There should be concurrent downloads value should be at least 1.")
+                self.handleComplete()
+                return
+            }
+            
+            guard self.prefetchResources.count > 0 else {
+                self.handleComplete()
+                return
+            }
+            //最大不超过maxConcurrentDownloads（默认5）
+            let initialConcurentDownloads = min(self.prefetchResources.count, self.maxConcurrentDownloads)
+            for _ in 0 ..< initialConcurentDownloads {
+                if let resource = self.pendingResources.popFirst() {
+                    self.startPrefetching(resource)
+                }
+            }
+        }
+    }
+
+   
+    /**
+     Stop current downloading progress, and cancel any future prefetching activity that might be occuring.
+     */
+    public func stop() {
+        DispatchQueue.main.safeAsync {
+            
+            if self.finished { return }
+            
+            self.stopped = true
+            self.tasks.forEach { (_, task) -> () in
+                task.cancel()
+            }
+        }
+    }
+    //下载并缓存
+    func downloadAndCache(_ resource: Resource) {
+
+        let downloadTaskCompletionHandler: CompletionHandler = { (image, error, _, _) -> () in
+            //完成后移除
+            self.tasks.removeValue(forKey: resource.downloadURL)
+            if let _ = error {
+                self.failedResources.append(resource)
+            } else {
+                self.completedResources.append(resource)
+            }
+            //总量下载进度
+            self.reportProgress()
+            if self.stopped {
+                if self.tasks.isEmpty {
+                    self.failedResources.append(contentsOf: self.pendingResources)
+                    self.handleComplete()
+                }
+            } else {
+                self.reportCompletionOrStartNext()
+            }
+        }
+        //交给manager。manager再交给ImageDownloader完成下载，iamgeCache完成缓存
+        let downloadTask = manager.downloadAndCacheImage(
+            with: resource.downloadURL,
+            forKey: resource.cacheKey,
+            retrieveImageTask: RetrieveImageTask(),
+            progressBlock: nil,
+            completionHandler: downloadTaskCompletionHandler,
+            options: optionsInfo)
+        
+        if let downloadTask = downloadTask {
+           // 构建下载任务字典
+            tasks[resource.downloadURL] = downloadTask
+        }
+    }
+    
+    func append(cached resource: Resource) {
+        //内存已存在的直接添加的跳过的URL里
+        skippedResources.append(resource)
+ 
+        reportProgress()
+        reportCompletionOrStartNext()
+    }
+    //开始下载
+    func startPrefetching(_ resource: Resource)
+    {
+        //always downloaded again
+        if optionsInfo.forceRefresh {
+            downloadAndCache(resource)
+        } else {//如果不是要求必须重新下载
+            //检查内存是否已存在
+            let alreadyInCache = manager.cache.isImageCached(forKey: resource.cacheKey,
+                                                             processorIdentifier: optionsInfo.processor.identifier).cached
+
+            if alreadyInCache {
+                append(cached: resource)
+            } else {
+                downloadAndCache(resource)
+            }
+        }
+    }
+    //下载进度
+    func reportProgress() {
+        progressBlock?(skippedResources, failedResources, completedResources)
+    }
+    //完成或者进行下一个
+    func reportCompletionOrStartNext() {
+        if let resource = pendingResources.popFirst() {
+            startPrefetching(resource)
+        } else {
+            guard tasks.isEmpty else { return }
+            handleComplete()
+        }
+    }
+    
+    func handleComplete() {
+        completionHandler?(skippedResources, failedResources, completedResources)
+        completionHandler = nil
+        progressBlock = nil
+    }
+```
