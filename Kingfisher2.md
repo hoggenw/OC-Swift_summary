@@ -1,3 +1,129 @@
+#ImageProcessor
+
+//图片处理器，定义
+
+```
+public enum ImageProcessItem {
+    case image(Image)
+    case data(Data)
+}
+
+/// An `ImageProcessor` would be used to convert some downloaded data to an image.
+public protocol ImageProcessor {
+
+    var identifier: String { get }
+    
+     func process(item: ImageProcessItem, options: KingfisherOptionsInfo) -> Image?
+}
+
+typealias ProcessorImp = ((ImageProcessItem, KingfisherOptionsInfo) -> Image?)
+
+public extension ImageProcessor {
+    
+    /// Append an `ImageProcessor` to another. The identifier of the new `ImageProcessor` 
+    /// will be "\(self.identifier)|>\(another.identifier)".
+    ///
+    /// - parameter another: An `ImageProcessor` you want to append to `self`.
+    ///
+    /// - returns: The new `ImageProcessor`. It will process the image in the order
+    ///            of the two processors concatenated.
+    public func append(another: ImageProcessor) -> ImageProcessor {
+        let newIdentifier = identifier.appending("|>\(another.identifier)")
+        return GeneralProcessor(identifier: newIdentifier) {
+            item, options in
+            //先由ImageProcessor转换成图片，再交给another完成another的操作
+            if let image = self.process(item: item, options: options) {
+                return another.process(item: .image(image), options: options)
+            } else {
+                return nil
+            }
+        }
+    }
+}
+
+fileprivate struct GeneralProcessor: ImageProcessor {
+    let identifier: String
+    let p: ProcessorImp
+    func process(item: ImageProcessItem, options: KingfisherOptionsInfo) -> Image? {
+        return p(item, options)
+    }
+}
+
+/// The default processor. It convert the input data to a valid image.
+/// Images of .PNG, .JPEG and .GIF format are supported.
+/// If an image is given, `DefaultImageProcessor` will do nothing on it and just return that image.
+public struct DefaultImageProcessor: ImageProcessor {
+    
+    /// A default `DefaultImageProcessor` could be used across.
+    public static let `default` = DefaultImageProcessor()
+    
+    public let identifier = ""
+    
+    /// Initialize a `DefaultImageProcessor`
+    ///
+    /// - returns: An initialized `DefaultImageProcessor`.
+    public init() {}
+    //图片处理器
+    public func process(item: ImageProcessItem, options: KingfisherOptionsInfo) -> Image? {
+        switch item {
+        case .image(let image):
+            return image
+        case .data(let data):
+            return Kingfisher<Image>.image(
+                data: data,
+                scale: options.scaleFactor,
+                preloadAllGIFData: options.preloadAllGIFData,
+                onlyFirstFrame: options.onlyLoadFirstFrame)
+        }
+    }
+}
+
+```
+
+图片处理器中的具体功能都在Image类中实现，他们都遵守并实现了ImageProcessor
+
+```
+//圆角
+public struct RoundCornerImageProcessor: ImageProcessor {
+    public let identifier: String
+
+    //输出图片的尺寸
+    public let targetSize: CGSize?
+
+    public init(cornerRadius: CGFloat, targetSize: CGSize? = nil) {
+        self.cornerRadius = cornerRadius
+        self.targetSize = targetSize
+        if let size = targetSize {
+            self.identifier = "com.onevcat.Kingfisher.RoundCornerImageProcessor(\(cornerRadius)_\(size))"
+        } else {
+            self.identifier = "com.onevcat.Kingfisher.RoundCornerImageProcessor(\(cornerRadius))"
+        }
+    }
+    
+    public func process(item: ImageProcessItem, options: KingfisherOptionsInfo) -> Image? {
+        switch item {
+        case .image(let image):
+            let size = targetSize ?? image.kf.size
+            return image.kf.image(withRoundRadius: cornerRadius, fit: size)
+        case .data(_):
+            //先转换为image，再做圆角处理
+            return (DefaultImageProcessor.default >> self).process(item: item, options: options)
+        }
+    }
+}
+//resize
+ResizingImageProcessor
+ //模糊图片
+ BlurImageProcessor
+ //颜色覆盖
+ OverlayImageProcessor
+ //tint
+ TintImageProcessor
+ //图片亮度、对比度等设置
+ ColorControlsProcessor
+ 
+```
+
 #image
 关联或者别名新属性
 
@@ -363,3 +489,4 @@ struct ImageIndicator: Indicator {
     }
 }
 ```
+
