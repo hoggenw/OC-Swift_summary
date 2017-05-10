@@ -28,7 +28,7 @@
 
 //定义协议,其中定义Object和Object类型并要求后续方法实现这个类型
 public protocol TransformType {
-	
+	//使用associatedtype关键字进行类型关联
 	associatedtype Object
 	associatedtype JSON
 

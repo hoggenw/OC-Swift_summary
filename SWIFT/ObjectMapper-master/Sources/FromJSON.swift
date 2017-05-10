@@ -29,6 +29,7 @@
 internal final class FromJSON {
 	
 	/// Basic type
+	//赋值
 	class func basicType<FieldType>(_ field: inout FieldType, object: FieldType?) {
 		if let value = object {
 			field = value

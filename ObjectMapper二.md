@@ -279,6 +279,7 @@ public final class Mapper<N: BaseMappable> {
 ```
 
 ###Mappable
+对外核心功能接口，遵守Mappable协议以后，对象就可以直接调用类方法实现对象与json的相互转换
 
 ```
 /// BaseMappable should not be implemented directly. Mappable or StaticMappable should be used instead
@@ -300,6 +301,7 @@ public protocol StaticMappable: BaseMappable {
 	static func objectForMapping(map: Map) -> BaseMappable?
 }
 
+//扩展实现对象转json或json转对象
 public extension BaseMappable {
 	
 	/// Initializes object from a JSON String
@@ -330,65 +332,13 @@ public extension BaseMappable {
 		return Mapper().toJSONString(self, prettyPrint: prettyPrint)
 	}
 }
-
+//转化为对象数组与json 四个核心方法（字符串json转对象数组，json转对象数组，及对象数组的反转）
 public extension Array where Element: BaseMappable {
 	
-	/// Initialize Array from a JSON String
-	public init?(JSONString: String, context: MapContext? = nil) {
-		if let obj: [Element] = Mapper(context: context).mapArray(JSONString: JSONString) {
-			self = obj
-		} else {
-			return nil
-		}
-	}
-	
-	/// Initialize Array from a JSON Array
-	public init?(JSONArray: [[String: Any]], context: MapContext? = nil) {
-		if let obj: [Element] = Mapper(context: context).mapArray(JSONArray: JSONArray) {
-			self = obj
-		} else {
-			return nil
-		}
-	}
-	
-	/// Returns the JSON Array
-	public func toJSON() -> [[String: Any]] {
-		return Mapper().toJSONArray(self)
-	}
-	
-	/// Returns the JSON String for the object
-	public func toJSONString(prettyPrint: Bool = false) -> String? {
-		return Mapper().toJSONString(self, prettyPrint: prettyPrint)
-	}
 }
-
+//转化为对象集合与json（集合由数组转化而来） 四个核心方法（字符串json转对象集合，json转对象集合，及对象集合的反转）
 public extension Set where Element: BaseMappable {
 	
-	/// Initializes a set from a JSON String
-	public init?(JSONString: String, context: MapContext? = nil) {
-		if let obj: Set<Element> = Mapper(context: context).mapSet(JSONString: JSONString) {
-			self = obj
-		} else {
-			return nil
-		}
-	}
-	
-	/// Initializes a set from JSON
-	public init?(JSONArray: [[String: Any]], context: MapContext? = nil) {
-		guard let obj = Mapper(context: context).mapSet(JSONArray: JSONArray) as Set<Element>? else {
-            return nil
-        }
-		self = obj
-	}
-	
-	/// Returns the JSON Set
-	public func toJSON() -> [[String: Any]] {
-		return Mapper().toJSONSet(self)
-	}
-	
-	/// Returns the JSON String for the object
-	public func toJSONString(prettyPrint: Bool = false) -> String? {
-		return Mapper().toJSONString(self, prettyPrint: prettyPrint)
-	}
+
 }
 ```

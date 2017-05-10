@@ -27,7 +27,7 @@
 //  THE SOFTWARE.
 
 import Foundation
-//枚举与枚举值的相互转换
+//枚举与枚举值的相互转换 因为基本类型 enum 就遵循了RawRepresentable
 open class EnumTransform<T: RawRepresentable>: TransformType {
 	public typealias Object = T
 	public typealias JSON = T.RawValue

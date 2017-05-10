@@ -41,11 +41,13 @@ infix operator >>>
 // MARK:- Objects with Basic types
 
 /// Object of Basic type
+//定义运算符作用，左侧等于右侧
 public func <- <T>(left: inout T, right: Map) {
 	switch right.mappingType {
 	case .fromJSON where right.isKeyPresent:
 		FromJSON.basicType(&left, object: right.value())
 	case .toJSON:
+		//转json
 		left >>> right
 	default: ()
 	}
@@ -90,6 +92,7 @@ public func <- <T>(left: inout T!, right: Map) {
 // MARK:- Mappable Objects - <T: BaseMappable>
 
 /// Object conforming to Mappable
+//对象赋值
 public func <- <T: BaseMappable>(left: inout T, right: Map) {
 	switch right.mappingType {
 	case .fromJSON:

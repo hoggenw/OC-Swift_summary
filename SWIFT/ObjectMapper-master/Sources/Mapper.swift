@@ -34,6 +34,7 @@ public enum MappingType {
 }
 
 /// The Mapper class provides methods for converting Model objects to JSON and methods for converting JSON to Model objects
+//泛型是我们要转成的对象的类
 public final class Mapper<N: BaseMappable> {
 	
 	public var context: MapContext?
@@ -45,18 +46,17 @@ public final class Mapper<N: BaseMappable> {
 	}
 	
 	// MARK: Mapping functions that map to an existing object toObject
-	//json对象像已存在的object赋值
+	//json转成已存在的object（赋值）
 	/// Maps a JSON object to an existing Mappable object if it is a JSON dictionary, or returns the passed object as is
 	public func map(JSONObject: Any?, toObject object: N) -> N {
 		if let JSON = JSONObject as? [String: Any] {
 			return map(JSON: JSON, toObject: object)
 		}
-		
 		return object
 	}
 	
 	/// Map a JSON string onto an existing object
-	//json字符串像已存在的object赋值
+	//json字符串向object赋值并返回对象
 	public func map(JSONString: String, toObject object: N) -> N {
 		if let JSON = Mapper.parseJSONStringIntoDictionary(JSONString: JSONString) {
 			return map(JSON: JSON, toObject: object)
@@ -66,6 +66,7 @@ public final class Mapper<N: BaseMappable> {
 	
 	/// Maps a JSON dictionary to an existing object that conforms to Mappable.
 	/// Usefull for those pesky objects that have crappy designated initializers like NSManagedObject
+	
 	public func map(JSON: [String: Any], toObject object: N) -> N {
 		var mutableObject = object
 		//map初始化
@@ -149,17 +150,17 @@ public final class Mapper<N: BaseMappable> {
 
 		// failed to parse JSON into array form
 		// try to parse it into a dictionary and then wrap it in an array
+		//构建数组
 		if let object = map(JSONObject: parsedJSON) {
 			return [object]
 		}
-
 		return nil
 	}
 	
 	/// Maps a JSON object to an array of Mappable objects if it is an array of JSON dictionary, or returns nil.
 	public func mapArray(JSONObject: Any?) -> [N]? {
 		if let JSONArray = JSONObject as? [[String: Any]] {
-			//
+			//转对象数组
 			return mapArray(JSONArray: JSONArray)
 		}
 
@@ -298,6 +299,7 @@ extension Mapper {
 	// MARK: Functions that create JSON from objects	
 	
 	///Maps an object that conforms to Mappable to a JSON dictionary <String, Any>
+	//对象转json
 	public func toJSON(_ object: N) -> [String: Any] {
 		var mutableObject = object
 		let map = Map(mappingType: .toJSON, JSON: [:], context: context, shouldIncludeNilValues: shouldIncludeNilValues)
@@ -306,6 +308,7 @@ extension Mapper {
 	}
 	
 	///Maps an array of Objects to an array of JSON dictionaries [[String: Any]]
+	//对象数组转json
 	public func toJSONArray(_ array: [N]) -> [[String: Any]] {
 		return array.map {
 			// convert every element in array to JSON dictionary equivalent
@@ -330,6 +333,7 @@ extension Mapper {
 	}
 	
 	/// Maps an Object to a JSON string with option of pretty formatting
+	//转jsonString
 	public func toJSONString(_ object: N, prettyPrint: Bool = false) -> String? {
 		let JSONDict = toJSON(object)
 		
@@ -337,6 +341,7 @@ extension Mapper {
 	}
 
     /// Maps an array of Objects to a JSON string with option of pretty formatting	
+	//转json字符串
     public func toJSONString(_ array: [N], prettyPrint: Bool = false) -> String? {
         let JSONDict = toJSONArray(array)
         
@@ -344,6 +349,7 @@ extension Mapper {
     }
 	
 	/// Converts an Object to a JSON string with option of pretty formatting
+	//转json字符串
 	public static func toJSONString(_ JSONObject: Any, prettyPrint: Bool) -> String? {
 		let options: JSONSerialization.WritingOptions = prettyPrint ? .prettyPrinted : []
 		if let JSON = Mapper.toJSONData(JSONObject, options: options) {

@@ -56,11 +56,11 @@ public final class Map {
 	
 	public init(mappingType: MappingType, JSON: [String: Any], toObject: Bool = false, context: MapContext? = nil, shouldIncludeNilValues: Bool = false) {
 		
-		self.mappingType = mappingType
-		self.JSON = JSON
-		self.toObject = toObject
-		self.context = context
-		self.shouldIncludeNilValues = shouldIncludeNilValues
+		self.mappingType = mappingType//转json还是转对象
+		self.JSON = JSON //json数据内容
+		self.toObject = toObject //转对象？
+		self.context = context //
+		self.shouldIncludeNilValues = shouldIncludeNilValues //是否允许包含nil
 	}
 	
 	//根据key 寻值

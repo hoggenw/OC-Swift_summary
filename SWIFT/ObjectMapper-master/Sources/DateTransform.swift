@@ -29,7 +29,7 @@
 import Foundation
 
 open class DateTransform: TransformType {
-	//遵守TransformType协议
+	//遵守TransformType协议，实现协议时才指定类型
 	public typealias Object = Date
 	public typealias JSON = Double
 

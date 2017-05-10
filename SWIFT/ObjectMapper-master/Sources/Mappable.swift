@@ -47,6 +47,7 @@ public protocol StaticMappable: BaseMappable {
 	static func objectForMapping(map: Map) -> BaseMappable?
 }
 
+//扩展实现对象转json或json转对象
 public extension BaseMappable {
 	
 	/// Initializes object from a JSON String
@@ -71,13 +72,12 @@ public extension BaseMappable {
 	public func toJSON() -> [String: Any] {
 		return Mapper().toJSON(self)
 	}
-	
 	/// Returns the JSON String for the object
 	public func toJSONString(prettyPrint: Bool = false) -> String? {
 		return Mapper().toJSONString(self, prettyPrint: prettyPrint)
 	}
 }
-
+//转化为对象数组与json
 public extension Array where Element: BaseMappable {
 	
 	/// Initialize Array from a JSON String
@@ -108,7 +108,7 @@ public extension Array where Element: BaseMappable {
 		return Mapper().toJSONString(self, prettyPrint: prettyPrint)
 	}
 }
-
+//转化为对象集合与json（集合由数组转化而来）
 public extension Set where Element: BaseMappable {
 	
 	/// Initializes a set from a JSON String

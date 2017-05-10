@@ -29,6 +29,7 @@
 import Foundation
 //字符串和URL的转换
 open class URLTransform: TransformType {
+	
 	public typealias Object = URL
 	public typealias JSON = String
 	private let shouldEncodeURLString: Bool

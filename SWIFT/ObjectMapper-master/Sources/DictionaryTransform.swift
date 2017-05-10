@@ -22,12 +22,12 @@ public struct DictionaryTransform<Key, Value>: TransformType where Key: Hashable
 			return nil
 		}
 		
-		
+		//需要返回一个字典
 		let result = json.reduce([:]) { (result, element) -> [Key: Value] in
 			
 			guard
 			let key = Key(rawValue: element.0),
-			let valueJSON = element.1 as? [String: Any],
+			let valueJSON = element.1 as? [String: Any],//
 			let value = Value(JSON: valueJSON)
 			else {
 				
@@ -48,7 +48,6 @@ public struct DictionaryTransform<Key, Value>: TransformType where Key: Hashable
 			
 			let key = element.0.rawValue
 			let value = element.1.toJSON()
-			
 			var result = result
 			result[key] = value
 			return result

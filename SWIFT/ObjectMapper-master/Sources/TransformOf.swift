@@ -32,12 +32,12 @@ open class TransformOf<ObjectType, JSONType>: TransformType {
 
 	private let fromJSON: (JSONType?) -> ObjectType?
 	private let toJSON: (ObjectType?) -> JSONType?
-    //初始化实现block转换方法
+    //初始化定义Object和JSON类型
 	public init(fromJSON: @escaping(JSONType?) -> ObjectType?, toJSON: @escaping(ObjectType?) -> JSONType?) {
 		self.fromJSON = fromJSON
 		self.toJSON = toJSON
 	}
-
+    //由block实现具体转换
 	open func transformFromJSON(_ value: Any?) -> ObjectType? {
 		return fromJSON(value as? JSONType)
 	}

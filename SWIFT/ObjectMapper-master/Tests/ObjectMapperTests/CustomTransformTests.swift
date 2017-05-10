@@ -228,7 +228,7 @@ class Transforms: Mappable {
 		
 		ISO8601Date			<- (map["ISO8601Date"], ISO8601DateTransform())
 		ISO8601DateOpt		<- (map["ISO8601DateOpt"], ISO8601DateTransform())
-		
+		//初始化自定义时间格式
 		customFormatDate	<- (map["customFormateDate"], CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss"))
 		customFormatDateOpt <- (map["customFormateDateOpt"], CustomDateFormatTransform(formatString: "yyyy-MM-dd'T'HH:mm:ss"))
 
