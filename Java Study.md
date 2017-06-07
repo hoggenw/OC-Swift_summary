@@ -53,3 +53,6 @@ Spring Boot默认提供静态资源目录位置需置于classpath下，目录名
 * 添加支持库
 * 使用@Controller
 * return模板文件的名称
+
+#Maven 创建项目
+mvn archetype:generate -DgroupId=这里写ID -DartifactId=这里写项目名 -DarchetypeArtifactId=maven-archetype-quickstart -DinteractiveMode=false
