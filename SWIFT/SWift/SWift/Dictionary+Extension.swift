@@ -28,4 +28,21 @@ extension Dictionary {
         return needString!
     }
     
+    func convertDictionaryToData() -> Data? {
+        var result:Data?
+        do {
+            let jsonData: Data = try JSONSerialization.data(withJSONObject: self, options: JSONSerialization.WritingOptions.init(rawValue: 0))
+            result = jsonData;
+            //            if let JSONString = String(data: jsonData, encoding: String.Encoding.utf8) {
+            //                result = JSONString
+            //            }
+            
+        } catch {
+            print("convert dictionary To string error")
+        }
+        return result
+    }
+    
+
+    
 }

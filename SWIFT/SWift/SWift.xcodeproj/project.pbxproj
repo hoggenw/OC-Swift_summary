@@ -16,6 +16,7 @@
 		112329F41DC8752000B1911B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112329F31DC8752000B1911B /* String+Extension.swift */; };
 		112956761DDC390200BEDC86 /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112956751DDC390200BEDC86 /* CommonUtils.swift */; };
 		113641591DC3247900D1DD71 /* VerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 113641581DC3247900D1DD71 /* VerifyCodeButton.swift */; };
+		114C4B5D1F1617FB00F9C8C0 /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114C4B5C1F1617FB00F9C8C0 /* Data+Extension.swift */; };
 		115E7FCC1DDABA4200DADCA9 /* MyVerifyCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115E7FCB1DDABA4200DADCA9 /* MyVerifyCodeButton.swift */; };
 		11600D711DFFD96E002BC244 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */; };
 		116C78D91E00F1F5009FCB25 /* ScanQRCodesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 116C78D71E00F1F5009FCB25 /* ScanQRCodesViewController.swift */; };
@@ -50,6 +51,7 @@
 		112329F31DC8752000B1911B /* String+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		112956751DDC390200BEDC86 /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		113641581DC3247900D1DD71 /* VerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyCodeButton.swift; sourceTree = "<group>"; };
+		114C4B5C1F1617FB00F9C8C0 /* Data+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		115E7FCB1DDABA4200DADCA9 /* MyVerifyCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyVerifyCodeButton.swift; sourceTree = "<group>"; };
 		11600D701DFFD96E002BC244 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		116C78D71E00F1F5009FCB25 /* ScanQRCodesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanQRCodesViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 				11F215851E037EE200D47722 /* TESTViewController.swift */,
 				11F215871E037F4C00D47722 /* TESTView.swift */,
 				11F215891E03876D00D47722 /* YLViewController.swift */,
+				114C4B5C1F1617FB00F9C8C0 /* Data+Extension.swift */,
 			);
 			path = SWift;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				119252F51DEEC89D00659281 /* PopupView.swift in Sources */,
 				11F2158A1E03876D00D47722 /* YLViewController.swift in Sources */,
 				116C78ED1E00F302009FCB25 /* LBXScanViewController.swift in Sources */,
+				114C4B5D1F1617FB00F9C8C0 /* Data+Extension.swift in Sources */,
 				1122693E1DFCD3C900EABCEB /* Date+Extension.swift in Sources */,
 				112329F41DC8752000B1911B /* String+Extension.swift in Sources */,
 				11600D711DFFD96E002BC244 /* UIViewController+Extension.swift in Sources */,
