@@ -79,3 +79,52 @@ KVO是一个对象能够观察另外一个对象的属性的值，并且能够�
   
   综上所述，我认为KVO的使用时明确的，而对于delegate和notification，我更偏向使用delegate
   而少用或者不用notification，从代码便于维护和结构清晰的角度考虑。
+  
+  
+  ###KVO实现探究
+  
+  四要素：观察者，被观察对象，被观察对象属性，响应方法
+  
+  1. 为NSObject+YLKVO.h自定义扩展，添加方法
+     - -(void)YLAddObserver:(NSObject *)observer
+                forKey:(NSString *)key
+             withBlock:(YLKVOBlock)block;//添加观察者
+
+     - -(void)YLRemoveObserver:(NSObject *)observer forKey:(NSString *)key;//移除观察者
+     - typedef void (^YLKVOBlock)(id observedObject, NSString *observedKey, id oldValue, id newValue);//使用block做响应事件
+     
+   2. 添加观察者
+     - 判断被观察对象属性是否实现setter方法
+     - 动态创建被观察对象的子类（如果没有被创建：继承被观察对象，分配空间，添加class方法，注册类）
+     - 为子类添加属性的setter方法:
+    
+    ``` 
+        1. 获取getter方法
+        2. 获取oldvalue
+        3. 构建receiver的结构体，将新值直接赋值给父类的setter方
+        
+        4. 获取动态关联（观察者）数组 （遍历key与setter相同的，异步执行block块）
+    ```  
+     
+     - 初始化观察者信息动态添加到观察者数组中去
+   
+   3. 移除观察者
+
+    动态获取观察者数组并且比对移除
+    
+    
+    具体demo在yltestcode中的YLAudioFrequecy中
+   
+     
+         
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
