@@ -13,6 +13,8 @@
 
 [telegram协议](https://core.telegram.org/mtproto)
 
+[使用telegram时网络请求封装参考](https://cloud.tencent.com/developer/article/1037791)
+
 #使用telegram创建app 翻译
 
 ```
