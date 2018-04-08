@@ -21,3 +21,7 @@
 ```
 服务器socks5接口https://github.com/yknext/socks-managersocks5服务器，redis用户名密码认证https://github.com/yknext/gost
 ```
+
+
+##### 设置代理方法完成执行处
+这个方法为设置完代理后的执行地方
