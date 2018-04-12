@@ -16,8 +16,17 @@
 ##### 点击聊天页面左侧按钮响应方法（标记）
 ##### 聊天页面自定义视图弹出按钮响应 （标记）
 ##### 发送好准备好的消息（标记）
+##### 开发新加参数（标记）
+##### 聊天框自适应视图方法 （标记）
+##### 点击对话左侧按钮弹出选择的ActionSheetmenu（标记）
+##### //RootController所在位置 （标记）
+#####  //tabbar设置title和image  （标记）
+##### 转发消息发送
+##### 创建MessageViewModel （标记）
+##### 设置链接信息的webfooter方法 （标记)
 
-
+##### TGMessage 消息载体 （标记，log）
+##### 获取链接附加内容的地方 （标记）
 ##### //代理配置
 
 ```
@@ -31,5 +40,40 @@
 ```
 
 
+
+
 ##### 设置代理方法完成执行处
 这个方法为设置完代理后的执行地方
+
+
+
+//我使用的代理方法
+
+```
+[[MTSocksProxySettings alloc] initWithIp:_addressItem.username port:(uint16_t)[_portItem.username intValue] username:_usernameItem.username password:_passwordItem.username]
+  NSData *data = nil;
+            if (updatedSettings != nil) {
+                NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+                if (updatedSettings.ip != nil && updatedSettings.port != 0) {
+                    dict[@"ip"] = updatedSettings.ip;
+                    dict[@"port"] = @(updatedSettings.port);
+                }
+                if (updatedSettings.username.length != 0) {
+                    dict[@"username"] = updatedSettings.username;
+                }
+                if (updatedSettings.password.length != 0) {
+                    dict[@"password"] = updatedSettings.password;
+                }
+                dict[@"inactive"] = @(inactive);
+                data = [NSKeyedArchiver archivedDataWithRootObject:dict];
+            } else {
+                data = [NSData data];
+            }
+            [TGDatabaseInstance() setCustomProperty:@"socksProxyData" value:data];
+            strongSelf->_proxySettings = inactive ? nil : updatedSettings;
+            strongSelf->_useProxyItem.variant = (!inactive && updatedSettings != nil) ? TGLocalized(@"ChatSettings.ConnectionType.UseSocks5") : TGLocalized(@"GroupInfo.SharedMediaNone");
+            
+            [[[TGTelegramNetworking instance] context] updateApiEnvironment:^MTApiEnvironment *(MTApiEnvironment *apiEnvironment) {
+                return [apiEnvironment withUpdatedSocksProxySettings:inactive ? nil : updatedSettings];
+            }];
+```
