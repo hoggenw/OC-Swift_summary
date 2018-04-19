@@ -30,6 +30,9 @@
 ##### 获取链接附加内容的地方 （标记）
 ##### //代理配置
 ##### 模型视图构造处：预计在此处更换视图（标记）
+##### chat_envelope_new chat_envelope_old （标记）红包图片
+##### 发送的消息添加到视图上时构建模型 （标记）
+
 
 ```
 文件：TGTelegramNetworking.m- (void) fetchProxySettingFromServer {    NSString *strURL = @"https://api.example.com/socks5";    NSURL *url = [NSURL URLWithString:strURL];    NSURLRequest *request = [NSURLRequest requestWithURL:url];    [self sendSyncWithRequest:request];}- (void)sendSyncWithRequest:(NSURLRequest *)request{    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];    NSDictionary *jdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];    NSString *status = jdict[@"status"];    NSString *succStatus = @"0";    if([succStatus isEqualToString:status]){        NSData *data = nil;        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];        dict[@"ip"] = jdict[@"ip"];        dict[@"port"] = jdict[@"port"];        dict[@"username"] = jdict[@"user"];        dict[@"password"] = jdict[@"pass"];        dict[@"token"] = jdict[@"token"];        dict[@"inactive"] = @(FALSE);        data = [NSKeyedArchiver archivedDataWithRootObject:dict];        [TGDatabaseInstance() setCustomProperty:@"socksProxyData" value:data];    }}+ (void)preload {        [[TGTelegramNetworking alloc] fetchProxySettingFromServer];        initialSocksProxyData = [TGDatabaseInstance() customProperty:@"socksProxyData"];}
