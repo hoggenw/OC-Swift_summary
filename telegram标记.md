@@ -34,7 +34,20 @@
 ##### 发送的消息添加到视图上时构建模型 （标记）
 ##### 尝试二次更新视图 （标记）
 ##### 修改发送红包视图大小失败的地方 （标记）
+##### 钱包功能切入地方 （标记）
 
+
+
+
+#####  进入登陆输入手机号码页面    （标记）
+##### 输入电话号码下一步执行     （标记）
+
+##### 输入验证码页面 （标记）
+
+##### 此处添加登陆账号操作 （标记）
+##### 此处要预存一下登陆的电话号码 （标记）
+
+##### 添加登录后用户信息获取判断与设置 （标记）
 
 ```
 文件：TGTelegramNetworking.m- (void) fetchProxySettingFromServer {    NSString *strURL = @"https://api.example.com/socks5";    NSURL *url = [NSURL URLWithString:strURL];    NSURLRequest *request = [NSURLRequest requestWithURL:url];    [self sendSyncWithRequest:request];}- (void)sendSyncWithRequest:(NSURLRequest *)request{    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];    NSDictionary *jdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];    NSString *status = jdict[@"status"];    NSString *succStatus = @"0";    if([succStatus isEqualToString:status]){        NSData *data = nil;        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];        dict[@"ip"] = jdict[@"ip"];        dict[@"port"] = jdict[@"port"];        dict[@"username"] = jdict[@"user"];        dict[@"password"] = jdict[@"pass"];        dict[@"token"] = jdict[@"token"];        dict[@"inactive"] = @(FALSE);        data = [NSKeyedArchiver archivedDataWithRootObject:dict];        [TGDatabaseInstance() setCustomProperty:@"socksProxyData" value:data];    }}+ (void)preload {        [[TGTelegramNetworking alloc] fetchProxySettingFromServer];        initialSocksProxyData = [TGDatabaseInstance() customProperty:@"socksProxyData"];}
