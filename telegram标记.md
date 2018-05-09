@@ -12,6 +12,7 @@
 
 
 ##### 创建发送的消息的方法（标记）
+##### https://www.biyong.info/redpacket.html (标识)
 ##### TGMenuSheetController 这是选择图片的文件位置的sheet
 ##### 点击聊天页面左侧按钮响应方法（标记）
 ##### 聊天页面自定义视图弹出按钮响应 （标记）
@@ -49,6 +50,7 @@
 
 ##### 添加登录后用户信息获取判断与设置 （标记）
 ##### 聊天界面响应方法位置 （标记）
+##### 加入群最终执行处 （标记）
 
 ```
 文件：TGTelegramNetworking.m- (void) fetchProxySettingFromServer {    NSString *strURL = @"https://api.example.com/socks5";    NSURL *url = [NSURL URLWithString:strURL];    NSURLRequest *request = [NSURLRequest requestWithURL:url];    [self sendSyncWithRequest:request];}- (void)sendSyncWithRequest:(NSURLRequest *)request{    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];    NSDictionary *jdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];    NSString *status = jdict[@"status"];    NSString *succStatus = @"0";    if([succStatus isEqualToString:status]){        NSData *data = nil;        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];        dict[@"ip"] = jdict[@"ip"];        dict[@"port"] = jdict[@"port"];        dict[@"username"] = jdict[@"user"];        dict[@"password"] = jdict[@"pass"];        dict[@"token"] = jdict[@"token"];        dict[@"inactive"] = @(FALSE);        data = [NSKeyedArchiver archivedDataWithRootObject:dict];        [TGDatabaseInstance() setCustomProperty:@"socksProxyData" value:data];    }}+ (void)preload {        [[TGTelegramNetworking alloc] fetchProxySettingFromServer];        initialSocksProxyData = [TGDatabaseInstance() customProperty:@"socksProxyData"];}
