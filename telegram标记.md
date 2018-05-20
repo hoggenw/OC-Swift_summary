@@ -39,6 +39,8 @@
 #####  获取到背景图片的view的地方 (标记，红包视图)
 ##### self.window.rootViewController （标记）
 
+##### // 版本更新提示 判断 （标记）
+
 
 
 
